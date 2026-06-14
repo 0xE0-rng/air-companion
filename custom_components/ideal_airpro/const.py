@@ -38,30 +38,28 @@ SWITCHES: dict[str, tuple[str, str, str]] = {
     "display": ("Display", "DE", "DD"),
 }
 
-# Raw status token -> (friendly name, unit, device_class). Values are raw
-# counts unless a unit is given. Tokens with dedicated entities (S=stage,
-# L=led, T=model) are not listed here.
+# Raw status token -> (friendly name, unit, device_class). Tokens handled
+# elsewhere are NOT listed here: S=stage, L=led, T=model (dedicated entities);
+# D/V used for derived PM2.5/Contamination; C=timer (number); K=child lock
+# (switch); A/M=mode (fan); H/X=device metadata.
 TOKEN_SENSORS: dict[str, tuple[str, str | None, str | None]] = {
-    "D": ("PM2.5", "µg/m³", "pm25"),
     "V": ("VOC", None, None),
-    "R": ("VOC reference", None, None),
     "Y": ("Ambient light", None, None),
     "Z": ("Filter run hours", "h", "duration"),
     "U": ("Fan RPM", "rpm", None),
+    "D": ("Dust (raw)", None, None),
+    "R": ("VOC reference", None, None),
     "I": ("Fan A2", None, None),
     "J": ("Fan A3", None, None),
     "P": ("Filter wasting", None, None),
     "W": ("Valency", None, None),
     "N": ("Stage 3-2 time", None, None),
     "O": ("Stage 2-1 time", None, None),
-    "C": ("Timer (raw)", None, None),
     "F": ("Filter status (raw)", None, None),
-    "A": ("Mode (raw)", None, None),
-    "M": ("Manual stage (raw)", None, None),
-    "K": ("Key lock (raw)", None, None),
-    "H": ("Hardware", None, None),
-    "X": ("Firmware (raw)", None, None),
 }
+
+# Token sensors created disabled by default (opt-in diagnostics).
+DISABLED_TOKENS: set[str] = {"D", "R", "I", "J", "P", "W", "N", "O", "F"}
 
 # Stage (S token) value -> human label.
 STAGE_LABELS: dict[str, str] = {

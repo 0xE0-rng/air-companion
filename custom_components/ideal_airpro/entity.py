@@ -22,4 +22,6 @@ class IdealAirProEntity(CoordinatorEntity[IdealAirProCoordinator]):
             name="Air Purifier",
             manufacturer="IDEAL",
             model=data.get("model"),
+            sw_version=data.get("firmware"),
+            hw_version=data.get("hardware"),
         )

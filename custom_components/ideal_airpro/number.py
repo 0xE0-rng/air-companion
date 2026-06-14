@@ -15,7 +15,7 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddE
     async_add_entities(
         [
             IdealAirProNumber(coordinator, "led", "LED brightness", "L", read_key="led"),
-            IdealAirProNumber(coordinator, "timer", "Timer", "C", read_key=None),
+            IdealAirProNumber(coordinator, "timer", "Timer", "C", read_key="timer"),
         ]
     )
 

@@ -125,6 +125,35 @@ def parse_status(raw: str) -> dict | None:
         status["power"] = "on"
         status["mode"] = {"Q": "quiet", "1": "stage1", "2": "stage2",
                           "3": "stage3", "T": "turbo"}.get(m, m)
+
+    # Device metadata (surfaced on the HA device, not as sensors).
+    if "X" in fields:
+        status["firmware"] = fields["X"]
+    if "H" in fields:
+        status["hardware"] = fields["H"]
+
+    def _int(token: str) -> int | None:
+        raw = fields.get(token)
+        try:
+            return int(raw) if raw is not None else None
+        except ValueError:
+            return None
+
+    timer = _int("C")
+    if timer is not None:
+        status["timer"] = timer
+
+    # Derived air quality. Contamination matches the app's formula
+    # max(voc/732, dust/13250) * 100, clamped 0-100. PM2.5 is the dust reading
+    # scaled to the cloud's 0-50 µg/m³ range (dust full-scale ~13250).
+    dust, voc = _int("D"), _int("V")
+    if dust is not None and voc is not None:
+        status["contamination"] = round(
+            max(min(voc / 732 * 100, 100), min(dust / 13250 * 100, 100))
+        )
+    if dust is not None:
+        status["pm25"] = round(dust * 50 / 13250, 1)
+
     return status
 
 
