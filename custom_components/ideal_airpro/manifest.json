@@ -1,9 +1,11 @@
 {
   "domain": "ideal_airpro",
   "name": "Ideal AirPro",
-  "codeowners": [],
+  "codeowners": ["@0xE0-rng"],
+  "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/your-repo/ideal-airpro",
+  "documentation": "https://github.com/0xE0-rng/air-companion",
   "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/0xE0-rng/air-companion/issues",
   "version": "1.0.0"
 }
