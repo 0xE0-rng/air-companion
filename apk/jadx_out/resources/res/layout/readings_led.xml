@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:textSize="68dp"
-    android:tag="layout/readings_led_0"
-    android:paddingTop="0dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    style="@style/ReadingsAppearance"/>

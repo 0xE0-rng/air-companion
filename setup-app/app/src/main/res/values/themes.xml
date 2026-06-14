@@ -1,6 +1,0 @@
-<resources>
-    <style name="Theme.IdealSetup" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="colorPrimary">#1B7A3D</item>
-        <item name="colorAccent">#33FF66</item>
-    </style>
-</resources>
