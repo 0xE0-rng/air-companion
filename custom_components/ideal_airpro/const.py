@@ -37,24 +37,38 @@ BUTTON_VERBS: dict[str, str] = {
 }
 
 # Raw status tokens surfaced as diagnostic sensors.
-TOKEN_SENSORS: dict[str, str] = {
-    "C": "Filter life counter",
-    "F": "Raw F",
-    "D": "Sensor D",
-    "V": "Sensor V",
-    "R": "Sensor R",
-    "N": "Counter N",
-    "O": "Counter O",
-    "Y": "Sensor Y",
-    "Z": "Sensor Z",
-    "P": "Sensor P",
-    "W": "Raw W",
-    "H": "Hardware H",
-    "I": "Sensor I",
-    "J": "Sensor J",
-    "U": "Sensor U",
-    "X": "Raw X",
-    "A": "Raw A (mode)",
-    "M": "Raw M (manual stage)",
-    "K": "Key lock (raw)",
+# Raw status token -> (friendly name, unit). Names derived from the device's
+# field order; values are raw counts unless a unit is given. Tokens handled by
+# dedicated entities (S=stage, L=led, T=model) are not listed here.
+TOKEN_SENSORS: dict[str, tuple[str, str | None]] = {
+    "D": ("Dust", None),
+    "V": ("VOC", None),
+    "R": ("VOC reference", None),
+    "Y": ("Ambient light", None),
+    "Z": ("Filter run hours", "h"),
+    "U": ("Fan RPM", "rpm"),
+    "I": ("Fan A2", None),
+    "J": ("Fan A3", None),
+    "P": ("Filter wasting", None),
+    "W": ("Valency", None),
+    "N": ("Stage 3-2 time", None),
+    "O": ("Stage 2-1 time", None),
+    "C": ("Timer (raw)", None),
+    "F": ("Filter status (raw)", None),
+    "A": ("Mode (raw)", None),
+    "M": ("Manual stage (raw)", None),
+    "K": ("Key lock (raw)", None),
+    "H": ("Hardware", None),
+    "X": ("Firmware (raw)", None),
+}
+
+# Stage (S token) value -> human label.
+STAGE_LABELS: dict[str, str] = {
+    "0": "Off",
+    "-": "Off",
+    "1": "Stage 1",
+    "2": "Stage 2",
+    "3": "Stage 3",
+    "Q": "Quiet",
+    "T": "Turbo",
 }

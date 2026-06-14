@@ -1,25 +1,25 @@
 """Sensor platform for Ideal AirPro."""
 from __future__ import annotations
 
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import SensorEntity, SensorStateClass
 from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import TOKEN_SENSORS
+from .const import STAGE_LABELS, TOKEN_SENSORS
 from .entity import IdealAirProEntity
 
 
 async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddEntitiesCallback) -> None:
-    """Set up the model sensor plus one diagnostic sensor per raw token."""
+    """Set up the stage/model sensors plus one sensor per raw status token."""
     coordinator = entry.runtime_data
     entities: list[SensorEntity] = [
         IdealAirProStageSensor(coordinator),
         IdealAirProModelSensor(coordinator),
     ]
     entities += [
-        IdealAirProTokenSensor(coordinator, token, name)
-        for token, name in TOKEN_SENSORS.items()
+        IdealAirProTokenSensor(coordinator, token, name, unit)
+        for token, (name, unit) in TOKEN_SENSORS.items()
     ]
     async_add_entities(entities)
 
@@ -36,7 +36,10 @@ class IdealAirProStageSensor(IdealAirProEntity, SensorEntity):
 
     @property
     def native_value(self) -> str | None:
-        return self.coordinator.data.get("stage")
+        raw = self.coordinator.data.get("stage")
+        if raw is None:
+            return None
+        return STAGE_LABELS.get(raw, raw)
 
     @property
     def extra_state_attributes(self) -> dict:
@@ -60,16 +63,25 @@ class IdealAirProModelSensor(IdealAirProEntity, SensorEntity):
 
 
 class IdealAirProTokenSensor(IdealAirProEntity, SensorEntity):
-    """A single raw status token."""
+    """A named status reading. Numeric values become numbers (graphable)."""
 
     _attr_entity_category = EntityCategory.DIAGNOSTIC
 
-    def __init__(self, coordinator, token: str, name: str) -> None:
+    def __init__(self, coordinator, token: str, name: str, unit: str | None) -> None:
         super().__init__(coordinator)
         self._token = token
         self._attr_name = name
         self._attr_unique_id = f"{coordinator.ip}_tok_{token}"
+        self._attr_native_unit_of_measurement = unit
+        if unit is not None:
+            self._attr_state_class = SensorStateClass.MEASUREMENT
 
     @property
-    def native_value(self) -> str | None:
-        return self.coordinator.data.get("tokens", {}).get(self._token)
+    def native_value(self):
+        value = self.coordinator.data.get("tokens", {}).get(self._token)
+        if value is None:
+            return None
+        # Numbers (leading zeros stripped) are graphable; keep text as-is.
+        if value.lstrip("-").isdigit():
+            return int(value)
+        return value
