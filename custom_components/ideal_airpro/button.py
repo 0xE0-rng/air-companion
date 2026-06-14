@@ -1,41 +1,33 @@
-"""
-Button entities for Ideal AirPro.
-"""
+"""Button platform for Ideal AirPro."""
+from __future__ import annotations
+
 from homeassistant.components.button import ButtonEntity
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from . import DOMAIN, device
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-BUTTONS = {
-    "child_lock": "KY",
-    "identify": "BD",
-    "filter_reset": "CR",
-    "night_on": "NE",
-    "night_off": "ND",
-    "display_on": "DE",
-    "display_off": "DD",
-    "off": "OFF",
-}
+from . import device
+from .const import BUTTON_VERBS
+from .entity import IdealAirProEntity
 
-async def async_setup_entry(hass, entry, async_add_entities):
-    """Add button entities."""
-    coordinator = hass.data[DOMAIN][entry.entry_id]
-    entities = [
-        IdealAirProButton(coordinator, key, name) 
-        for key, name in {k: k.replace("_", " ").title() for k, v in BUTTONS.items()}.items()
-    ]
-    async_add_entities(entities)
 
-class IdealAirProButton(CoordinatorEntity, ButtonEntity):
-    """Generic button entity for Ideal AirPro."""
+async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddEntitiesCallback) -> None:
+    """Set up the momentary control buttons."""
+    coordinator = entry.runtime_data
+    async_add_entities(
+        IdealAirProButton(coordinator, key, verb) for key, verb in BUTTON_VERBS.items()
+    )
 
-    def __init__(self, coordinator, unique_id, name):
+
+class IdealAirProButton(IdealAirProEntity, ButtonEntity):
+    """A momentary control verb (e.g. KY, BD, CR)."""
+
+    def __init__(self, coordinator, key: str, verb: str) -> None:
         super().__init__(coordinator)
-        self._attr_unique_id = f"ideal_airpro_{unique_id}"
-        self._attr_name = name
-        self._verb = BUTTONS[unique_id]
+        self._verb = verb
+        self._attr_name = key.replace("_", " ").title()
+        self._attr_unique_id = f"{coordinator.ip}_{key}"
 
-    async def async_press(self):
-        """Press the button."""
+    async def async_press(self) -> None:
         await self.coordinator.hass.async_add_executor_job(
             device.send_command, self.coordinator.ip, self._verb
         )

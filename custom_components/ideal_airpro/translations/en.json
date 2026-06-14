@@ -1,0 +1,19 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ideal AirPro",
+        "description": "Enter the local IP address of your purifier. The setup app shows it after pairing; a DHCP reservation keeps it stable.",
+        "data": {
+          "ip": "IP address"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach a purifier at that address."
+    },
+    "abort": {
+      "already_configured": "This purifier is already configured."
+    }
+  }
+}

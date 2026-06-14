@@ -1,64 +1,62 @@
-"""
-Fan entity for Ideal AirPro.
-"""
-from homeassistant.components.fan import FanEntity, FanPresetMode
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from . import DOMAIN, device
+"""Fan platform for Ideal AirPro."""
+from __future__ import annotations
 
-MODE_VERBS = {
-    "auto": "SA",
-    "quiet": "SQ",
-    "stage1": "S1",
-    "stage2": "S2",
-    "stage3": "S3",
-    "turbo": "ST",
-}
+from homeassistant.components.fan import FanEntity, FanEntityFeature
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-async def async_setup_entry(hass, entry, async_add_entities):
-    """Add fan entities."""
-    coordinator = hass.data[DOMAIN][entry.entry_id]
-    async_add_entities([IdealAirProFan(coordinator)])
+from . import device
+from .const import MODE_VERBS
+from .entity import IdealAirProEntity
 
-class IdealAirProFan(CoordinatorEntity, FanEntity):
-    """Fan entity for Ideal AirPro."""
+# TURN_ON/TURN_OFF features exist only on newer cores; add them when available.
+_FEATURES = FanEntityFeature.PRESET_MODE
+if hasattr(FanEntityFeature, "TURN_ON"):
+    _FEATURES |= FanEntityFeature.TURN_ON | FanEntityFeature.TURN_OFF
 
-    _attr_unique_id = "ideal_airpro_fan"
-    _attr_name = "Air Purifier"
+
+async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddEntitiesCallback) -> None:
+    """Set up the fan entity."""
+    async_add_entities([IdealAirProFan(entry.runtime_data)])
+
+
+class IdealAirProFan(IdealAirProEntity, FanEntity):
+    """The purifier fan: power + preset modes."""
+
+    _attr_name = None  # the main feature takes the device name
+    _attr_supported_features = _FEATURES
+    _attr_preset_modes = list(MODE_VERBS)
+
+    def __init__(self, coordinator) -> None:
+        super().__init__(coordinator)
+        self._attr_unique_id = f"{coordinator.ip}_fan"
 
     @property
     def is_on(self) -> bool:
-        """Return True if fan is on."""
         return self.coordinator.data.get("power") == "on"
 
     @property
     def preset_mode(self) -> str | None:
-        """Return the current preset mode."""
-        return self.coordinator.data.get("mode")
+        mode = self.coordinator.data.get("mode")
+        return mode if mode in MODE_VERBS else None
 
-    @property
-    def preset_modes(self) -> list[str]:
-        """Return the list of available preset modes."""
-        return list(MODE_VERBS.keys())
+    async def async_turn_on(self, percentage=None, preset_mode=None, **kwargs) -> None:
+        if self.coordinator.data.get("power") != "on":
+            await self._send("ON")  # ON is a toggle on this hardware
+        if preset_mode:
+            await self.async_set_preset_mode(preset_mode)
 
-    async def async_turn_on(self, **kwargs):
-        """Turn the fan on."""
-        await self.coordinator.hass.async_add_executor_job(
-            device.send_command, self.coordinator.ip, "ON"
-        )
-        await self.coordinator.async_request_refresh()
+    async def async_turn_off(self, **kwargs) -> None:
+        if self.coordinator.data.get("power") == "on":
+            await self._send("ON")  # toggle off
 
-    async def async_turn_off(self, **kwargs):
-        """Turn the fan off."""
-        # Note: Based on your bridge.py, the device only has an 'ON' toggle.
-        # If there's no 'OFF' verb, we can't actually turn it off via TCP.
-        # But we'll attempt it if you have a verb, or just log it.
-        self.coordinator.hass.logger.warning("Ideal AirPro does not support a remote OFF command")
-
-    async def async_set_preset_mode(self, preset_mode: str):
-        """Set the preset mode."""
+    async def async_set_preset_mode(self, preset_mode: str) -> None:
         verb = MODE_VERBS.get(preset_mode)
         if verb:
-            await self.coordinator.hass.async_add_executor_job(
-                device.send_command, self.coordinator.ip, verb
-            )
-            await self.coordinator.async_request_refresh()
+            await self._send(verb)
+
+    async def _send(self, verb: str) -> None:
+        await self.coordinator.hass.async_add_executor_job(
+            device.send_command, self.coordinator.ip, verb
+        )
+        await self.coordinator.async_request_refresh()

@@ -1,57 +1,50 @@
-"""
-Number entities for Ideal AirPro.
-"""
+"""Number platform for Ideal AirPro."""
+from __future__ import annotations
+
 from homeassistant.components.number import NumberEntity
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from . import DOMAIN, device
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-async def async_setup_entry(hass, entry, async_add_entities):
-    """Add number entities."""
-    coordinator = hass.data[DOMAIN][entry.entry_id]
-    async_add_entities([
-        IdealAirProNumber(coordinator, "led", "LED Brightness", 0, 9),
-        IdealAirProNumber(coordinator, "timer", "Timer", 0, 9),
-    ])
+from . import device
+from .entity import IdealAirProEntity
 
-class IdealAirProNumber(CoordinatorEntity, NumberEntity):
-    """Generic number entity for Ideal AirPro."""
 
-    def __init__(self, coordinator, unique_id, name, min_val, max_val):
+async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddEntitiesCallback) -> None:
+    """Set up the LED brightness and timer numbers."""
+    coordinator = entry.runtime_data
+    async_add_entities(
+        [
+            IdealAirProNumber(coordinator, "led", "LED brightness", "L", read_key="led"),
+            IdealAirProNumber(coordinator, "timer", "Timer", "C", read_key=None),
+        ]
+    )
+
+
+class IdealAirProNumber(IdealAirProEntity, NumberEntity):
+    """A 0-9 control mapped to an L<n> / C<n> verb."""
+
+    _attr_native_min_value = 0
+    _attr_native_max_value = 9
+    _attr_native_step = 1
+
+    def __init__(self, coordinator, key: str, name: str, verb_prefix: str, read_key: str | None) -> None:
         super().__init__(coordinator)
-        self._attr_unique_id = f"ideal_airpro_{unique_id}"
+        self._verb_prefix = verb_prefix
+        self._read_key = read_key
         self._attr_name = name
-        self._id = unique_id
-        self._min = min_val
-        self._max = max_val
+        self._attr_unique_id = f"{coordinator.ip}_{key}"
 
     @property
-    def native_value(self):
-        """Return the current value."""
-        if self._id == "led":
-            return int(self.coordinator.data.get("led", 0))
-        return 0 # Timer doesn't have a read-back value in your bridge
+    def native_value(self) -> float | None:
+        if self._read_key is None:
+            return None
+        try:
+            return int(self.coordinator.data.get(self._read_key, 0))
+        except (TypeError, ValueError):
+            return None
 
-    @property
-    def min_native_value(self):
-        return self._min
-
-    @property
-    def max_native_value(self):
-        return self._max
-
-    @property
-    def step(self):
-        return 1
-
-    async def async_set_value(self, value):
-        """Set the value."""
-        if self._id == "led":
-            verb = f"L{int(value)}"
-        elif self._id == "timer":
-            verb = f"C{int(value)}"
-        else:
-            return
-
+    async def async_set_native_value(self, value: float) -> None:
+        verb = f"{self._verb_prefix}{int(value)}"
         await self.coordinator.hass.async_add_executor_job(
             device.send_command, self.coordinator.ip, verb
         )

@@ -1,46 +1,25 @@
-"""
-Ideal AirPro integration setup.
-"""
-from homeassistant.core import HomeAssistant
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.helpers import dispatcher
+"""The Ideal AirPro integration."""
+from __future__ import annotations
 
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import HomeAssistant
+
+from .const import PLATFORMS
 from .coordinator import IdealAirProCoordinator
 
-DOMAIN = "ideal_airpro"
+type IdealAirProConfigEntry = ConfigEntry[IdealAirProCoordinator]
 
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+
+async def async_setup_entry(hass: HomeAssistant, entry: IdealAirProConfigEntry) -> bool:
     """Set up Ideal AirPro from a config entry."""
-    ip = entry.data["ip"]
-
-    # Create the coordinator
-    coordinator = IdealAirProCoordinator(hass, ip)
-    
-    # Fetch initial data
+    coordinator = IdealAirProCoordinator(hass, entry.data["ip"])
     await coordinator.async_config_entry_first_refresh()
 
-    # Store coordinator for use by platforms
-    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
-
-    # Forward the setup to the platforms (fan, sensor, number, button)
-    await hass.config_entries.async_forward_entry_setups(entry, [
-        "fan", 
-        "sensor", 
-        "number", 
-        "button"
-    ])
-
+    entry.runtime_data = coordinator
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 
-async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Unload a config entry."""
-    unload_ok = await hass.config_entries.async_unload_platforms(entry, [
-        "fan", 
-        "sensor", 
-        "number", 
-        "button"
-    ])
-    if unload_ok:
-        hass.data[DOMAIN].pop(entry.entry_id)
 
-    return unload_ok
+async def async_unload_entry(hass: HomeAssistant, entry: IdealAirProConfigEntry) -> bool:
+    """Unload a config entry."""
+    return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
