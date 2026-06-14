@@ -13,12 +13,35 @@ from .entity import IdealAirProEntity
 async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddEntitiesCallback) -> None:
     """Set up the model sensor plus one diagnostic sensor per raw token."""
     coordinator = entry.runtime_data
-    entities: list[SensorEntity] = [IdealAirProModelSensor(coordinator)]
+    entities: list[SensorEntity] = [
+        IdealAirProStageSensor(coordinator),
+        IdealAirProModelSensor(coordinator),
+    ]
     entities += [
         IdealAirProTokenSensor(coordinator, token, name)
         for token, name in TOKEN_SENSORS.items()
     ]
     async_add_entities(entities)
+
+
+class IdealAirProStageSensor(IdealAirProEntity, SensorEntity):
+    """The live running stage; carries the full parsed status as attributes."""
+
+    _attr_name = "Stage"
+    _attr_icon = "mdi:air-purifier"
+
+    def __init__(self, coordinator) -> None:
+        super().__init__(coordinator)
+        self._attr_unique_id = f"{coordinator.ip}_stage"
+
+    @property
+    def native_value(self) -> str | None:
+        return self.coordinator.data.get("stage")
+
+    @property
+    def extra_state_attributes(self) -> dict:
+        data = self.coordinator.data or {}
+        return {k: v for k, v in data.items() if k != "tokens"}
 
 
 class IdealAirProModelSensor(IdealAirProEntity, SensorEntity):
