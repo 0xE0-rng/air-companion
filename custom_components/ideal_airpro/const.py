@@ -9,6 +9,7 @@ PLATFORMS: list[Platform] = [
     Platform.FAN,
     Platform.SENSOR,
     Platform.NUMBER,
+    Platform.SWITCH,
     Platform.BUTTON,
 ]
 
@@ -24,42 +25,42 @@ MODE_VERBS: dict[str, str] = {
     "turbo": "ST",
 }
 
-# Momentary buttons -> verb. Filter reset is not reversible.
+# Momentary buttons -> verb. (Child lock / night / display are switches now.)
 BUTTON_VERBS: dict[str, str] = {
-    "child_lock": "KY",
     "identify": "BD",
     "filter_reset": "CR",
-    "night_on": "NE",
-    "night_off": "ND",
-    "display_on": "DE",
-    "display_off": "DD",
-    "off": "OFF",
 }
 
-# Raw status tokens surfaced as diagnostic sensors.
-# Raw status token -> (friendly name, unit). Names derived from the device's
-# field order; values are raw counts unless a unit is given. Tokens handled by
-# dedicated entities (S=stage, L=led, T=model) are not listed here.
-TOKEN_SENSORS: dict[str, tuple[str, str | None]] = {
-    "D": ("Dust", None),
-    "V": ("VOC", None),
-    "R": ("VOC reference", None),
-    "Y": ("Ambient light", None),
-    "Z": ("Filter run hours", "h"),
-    "U": ("Fan RPM", "rpm"),
-    "I": ("Fan A2", None),
-    "J": ("Fan A3", None),
-    "P": ("Filter wasting", None),
-    "W": ("Valency", None),
-    "N": ("Stage 3-2 time", None),
-    "O": ("Stage 2-1 time", None),
-    "C": ("Timer (raw)", None),
-    "F": ("Filter status (raw)", None),
-    "A": ("Mode (raw)", None),
-    "M": ("Manual stage (raw)", None),
-    "K": ("Key lock (raw)", None),
-    "H": ("Hardware", None),
-    "X": ("Firmware (raw)", None),
+# Toggle switches: name + on/off verbs. Night/Display are write-only (assumed
+# state); child lock is handled specially (reads the K token, toggles via KY).
+SWITCHES: dict[str, tuple[str, str, str]] = {
+    "night": ("Night mode", "NE", "ND"),
+    "display": ("Display", "DE", "DD"),
+}
+
+# Raw status token -> (friendly name, unit, device_class). Values are raw
+# counts unless a unit is given. Tokens with dedicated entities (S=stage,
+# L=led, T=model) are not listed here.
+TOKEN_SENSORS: dict[str, tuple[str, str | None, str | None]] = {
+    "D": ("PM2.5", "µg/m³", "pm25"),
+    "V": ("VOC", None, None),
+    "R": ("VOC reference", None, None),
+    "Y": ("Ambient light", None, None),
+    "Z": ("Filter run hours", "h", "duration"),
+    "U": ("Fan RPM", "rpm", None),
+    "I": ("Fan A2", None, None),
+    "J": ("Fan A3", None, None),
+    "P": ("Filter wasting", None, None),
+    "W": ("Valency", None, None),
+    "N": ("Stage 3-2 time", None, None),
+    "O": ("Stage 2-1 time", None, None),
+    "C": ("Timer (raw)", None, None),
+    "F": ("Filter status (raw)", None, None),
+    "A": ("Mode (raw)", None, None),
+    "M": ("Manual stage (raw)", None, None),
+    "K": ("Key lock (raw)", None, None),
+    "H": ("Hardware", None, None),
+    "X": ("Firmware (raw)", None, None),
 }
 
 # Stage (S token) value -> human label.

@@ -18,8 +18,8 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddE
         IdealAirProModelSensor(coordinator),
     ]
     entities += [
-        IdealAirProTokenSensor(coordinator, token, name, unit)
-        for token, (name, unit) in TOKEN_SENSORS.items()
+        IdealAirProTokenSensor(coordinator, token, name, unit, device_class)
+        for token, (name, unit, device_class) in TOKEN_SENSORS.items()
     ]
     async_add_entities(entities)
 
@@ -65,16 +65,20 @@ class IdealAirProModelSensor(IdealAirProEntity, SensorEntity):
 class IdealAirProTokenSensor(IdealAirProEntity, SensorEntity):
     """A named status reading. Numeric values become numbers (graphable)."""
 
-    _attr_entity_category = EntityCategory.DIAGNOSTIC
-
-    def __init__(self, coordinator, token: str, name: str, unit: str | None) -> None:
+    def __init__(
+        self, coordinator, token: str, name: str, unit: str | None, device_class: str | None
+    ) -> None:
         super().__init__(coordinator)
         self._token = token
         self._attr_name = name
         self._attr_unique_id = f"{coordinator.ip}_tok_{token}"
         self._attr_native_unit_of_measurement = unit
-        if unit is not None:
+        self._attr_device_class = device_class
+        if unit is not None or device_class is not None:
             self._attr_state_class = SensorStateClass.MEASUREMENT
+        else:
+            # Unitless raw values are diagnostics.
+            self._attr_entity_category = EntityCategory.DIAGNOSTIC
 
     @property
     def native_value(self):
