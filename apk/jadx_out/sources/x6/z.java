@@ -1,0 +1,29 @@
+package x6;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+/* JADX INFO: compiled from: com.google.firebase:firebase-auth@@20.0.4 */
+/* JADX INFO: loaded from: classes.dex */
+public final class z implements Parcelable.Creator<s> {
+    @Override // android.os.Parcelable.Creator
+    public final s createFromParcel(Parcel parcel) {
+        int iS = g4.c.s(parcel);
+        String strC = null;
+        while (parcel.dataPosition() < iS) {
+            int i10 = parcel.readInt();
+            if ((65535 & i10) != 1) {
+                g4.c.r(parcel, i10);
+            } else {
+                strC = g4.c.c(parcel, i10);
+            }
+        }
+        g4.c.g(parcel, iS);
+        return new s(strC);
+    }
+
+    @Override // android.os.Parcelable.Creator
+    public final /* bridge */ /* synthetic */ s[] newArray(int i10) {
+        return new s[i10];
+    }
+}

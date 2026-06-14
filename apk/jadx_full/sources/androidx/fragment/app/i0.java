@@ -1,0 +1,579 @@
+package androidx.fragment.app;
+
+import a2.n;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.util.Base64;
+import android.util.Log;
+import android.util.Pair;
+import b2.b;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.a;
+import java.io.EOFException;
+import java.security.GeneralSecurityException;
+import java.security.InvalidAlgorithmParameterException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import org.json.JSONException;
+import org.json.JSONObject;
+import v1.a;
+import v4.a4;
+import v4.af;
+import v4.bd;
+import v4.h2;
+import v4.hc;
+import v4.kd;
+import v4.me;
+import v4.s1;
+import v4.s7;
+import v4.z7;
+import v4.zd;
+
+/* JADX INFO: compiled from: FragmentStore.java */
+/* JADX INFO: loaded from: classes.dex */
+public class i0 implements b.a, n.b, a4, kd, bd, k5.a {
+    public final /* synthetic */ int m;
+
+    /* JADX INFO: renamed from: n, reason: collision with root package name */
+    public final Object f1147n;
+
+    /* JADX INFO: renamed from: o, reason: collision with root package name */
+    public Object f1148o;
+    public Object p;
+
+    public i0() {
+        this.m = 0;
+        this.f1147n = new ArrayList();
+        this.f1148o = new HashMap();
+    }
+
+    public /* synthetic */ i0(e.q qVar, Object obj, hc hcVar, int i10) {
+        this.m = i10;
+        this.p = qVar;
+        this.f1147n = obj;
+        this.f1148o = hcVar;
+    }
+
+    public i0(Class cls) {
+        this.m = 6;
+        this.f1147n = new ConcurrentHashMap();
+        this.p = cls;
+    }
+
+    public /* synthetic */ i0(Object obj, Object obj2, Object obj3, int i10) {
+        this.m = i10;
+        this.f1147n = obj;
+        this.f1148o = obj2;
+        this.p = obj3;
+    }
+
+    public i0(String str, String str2, String str3) {
+        this.m = 10;
+        f4.q.f(str);
+        this.f1147n = str;
+        f4.q.f(str2);
+        this.f1148o = str2;
+        this.p = str3;
+    }
+
+    public i0(String str, n1.c cVar) {
+        this.m = 1;
+        j2.y.g(str, "name");
+        this.f1148o = str;
+        this.p = cVar;
+        this.f1147n = new ArrayList();
+    }
+
+    public i0(k2.k kVar) {
+        this.m = 5;
+        this.f1147n = kVar;
+    }
+
+    public i0(byte[] bArr) throws GeneralSecurityException {
+        this.m = 7;
+        z7.a(bArr.length);
+        SecretKeySpec secretKeySpec = new SecretKeySpec(bArr, "AES");
+        this.f1147n = secretKeySpec;
+        Cipher cipherA = s7.f13182e.a("AES/ECB/NoPadding");
+        cipherA.init(1, secretKeySpec);
+        byte[] bArrZ = androidx.appcompat.widget.m.z(cipherA.doFinal(new byte[16]));
+        this.f1148o = bArrZ;
+        this.p = androidx.appcompat.widget.m.z(bArrZ);
+    }
+
+    @Override // b2.b.a
+    public Object a() {
+        y1.b bVar = (y1.b) this.f1147n;
+        v1.i iVar = (v1.i) this.f1148o;
+        bVar.f13951d.N(iVar, (v1.f) this.p);
+        bVar.f13948a.a(iVar, 1);
+        return null;
+    }
+
+    /* JADX DEBUG: Incorrect finally slice size: {[INVOKE, CONSTRUCTOR] complete}, expected: {[INVOKE] complete} */
+    /* JADX WARN: Finally extract failed */
+    @Override // a2.n.b
+    public Object apply(Object obj) {
+        long jInsert;
+        a2.n nVar;
+        int i10 = 0;
+        int i11 = 1;
+        switch (this.m) {
+            case 3:
+                a2.n nVar2 = (a2.n) this.f1147n;
+                List list = (List) this.f1148o;
+                v1.i iVar = (v1.i) this.p;
+                Cursor cursor = (Cursor) obj;
+                s1.b bVar = a2.n.f34q;
+                while (cursor.moveToNext()) {
+                    long j10 = cursor.getLong(i10);
+                    int i12 = cursor.getInt(7) != 0 ? i11 : i10;
+                    a.b bVar2 = new a.b();
+                    bVar2.f12565f = new HashMap();
+                    bVar2.f(cursor.getString(i11));
+                    bVar2.e(cursor.getLong(2));
+                    bVar2.g(cursor.getLong(3));
+                    if (i12 != 0) {
+                        String string = cursor.getString(4);
+                        bVar2.d(new v1.e(string == null ? a2.n.f34q : new s1.b(string), cursor.getBlob(5)));
+                        nVar = nVar2;
+                    } else {
+                        String string2 = cursor.getString(4);
+                        s1.b bVar3 = string2 == null ? a2.n.f34q : new s1.b(string2);
+                        String[] strArr = new String[i11];
+                        strArr[i10] = String.valueOf(j10);
+                        Cursor cursorQuery = nVar2.b().query("event_payloads", new String[]{"bytes"}, "event_id = ?", strArr, null, null, "sequence_num");
+                        try {
+                            ArrayList arrayList = new ArrayList();
+                            int length = i10;
+                            while (cursorQuery.moveToNext()) {
+                                byte[] blob = cursorQuery.getBlob(i10);
+                                arrayList.add(blob);
+                                length += blob.length;
+                                break;
+                            }
+                            byte[] bArr = new byte[length];
+                            int length2 = i10;
+                            int i13 = length2;
+                            while (i13 < arrayList.size()) {
+                                byte[] bArr2 = (byte[]) arrayList.get(i13);
+                                a2.n nVar3 = nVar2;
+                                ArrayList arrayList2 = arrayList;
+                                System.arraycopy(bArr2, 0, bArr, length2, bArr2.length);
+                                length2 += bArr2.length;
+                                i13++;
+                                arrayList = arrayList2;
+                                nVar2 = nVar3;
+                            }
+                            nVar = nVar2;
+                            cursorQuery.close();
+                            bVar2.d(new v1.e(bVar3, bArr));
+                        } catch (Throwable th) {
+                            cursorQuery.close();
+                            throw th;
+                        }
+                    }
+                    if (!cursor.isNull(6)) {
+                        bVar2.f12561b = Integer.valueOf(cursor.getInt(6));
+                    }
+                    list.add(new a2.b(j10, iVar, bVar2.b()));
+                    nVar2 = nVar;
+                    i10 = 0;
+                    i11 = 1;
+                }
+                return null;
+            default:
+                a2.n nVar4 = (a2.n) this.f1147n;
+                v1.i iVar2 = (v1.i) this.f1148o;
+                v1.f fVar = (v1.f) this.p;
+                SQLiteDatabase sQLiteDatabase = (SQLiteDatabase) obj;
+                s1.b bVar4 = a2.n.f34q;
+                if (nVar4.b().compileStatement("PRAGMA page_size").simpleQueryForLong() * nVar4.b().compileStatement("PRAGMA page_count").simpleQueryForLong() >= nVar4.p.e()) {
+                    return -1L;
+                }
+                Long lI = nVar4.i(sQLiteDatabase, iVar2);
+                if (lI != null) {
+                    jInsert = lI.longValue();
+                } else {
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("backend_name", iVar2.b());
+                    contentValues.put("priority", Integer.valueOf(d2.a.a(iVar2.d())));
+                    contentValues.put("next_request_ms", (Integer) 0);
+                    if (iVar2.c() != null) {
+                        contentValues.put("extras", Base64.encodeToString(iVar2.c(), 0));
+                    }
+                    jInsert = sQLiteDatabase.insert("transport_contexts", null, contentValues);
+                }
+                int iD = nVar4.p.d();
+                byte[] bArr3 = fVar.d().f12581b;
+                boolean z10 = bArr3.length <= iD;
+                ContentValues contentValues2 = new ContentValues();
+                contentValues2.put("context_id", Long.valueOf(jInsert));
+                contentValues2.put("transport_name", fVar.g());
+                contentValues2.put("timestamp_ms", Long.valueOf(fVar.e()));
+                contentValues2.put("uptime_ms", Long.valueOf(fVar.h()));
+                contentValues2.put("payload_encoding", fVar.d().f12580a.f11222a);
+                contentValues2.put("code", fVar.c());
+                contentValues2.put("num_attempts", (Integer) 0);
+                contentValues2.put("inline", Boolean.valueOf(z10));
+                contentValues2.put("payload", z10 ? bArr3 : new byte[0]);
+                long jInsert2 = sQLiteDatabase.insert("events", null, contentValues2);
+                if (!z10) {
+                    int iCeil = (int) Math.ceil(((double) bArr3.length) / ((double) iD));
+                    for (int i14 = 1; i14 <= iCeil; i14++) {
+                        byte[] bArrCopyOfRange = Arrays.copyOfRange(bArr3, (i14 - 1) * iD, Math.min(i14 * iD, bArr3.length));
+                        ContentValues contentValues3 = new ContentValues();
+                        contentValues3.put("event_id", Long.valueOf(jInsert2));
+                        contentValues3.put("sequence_num", Integer.valueOf(i14));
+                        contentValues3.put("bytes", bArrCopyOfRange);
+                        sQLiteDatabase.insert("event_payloads", null, contentValues3);
+                    }
+                }
+                for (Map.Entry entry : Collections.unmodifiableMap(fVar.b()).entrySet()) {
+                    ContentValues contentValues4 = new ContentValues();
+                    contentValues4.put("event_id", Long.valueOf(jInsert2));
+                    contentValues4.put("name", (String) entry.getKey());
+                    contentValues4.put("value", (String) entry.getValue());
+                    sQLiteDatabase.insert("event_metadata", null, contentValues4);
+                }
+                return Long.valueOf(jInsert2);
+        }
+    }
+
+    @Override // v4.a4
+    public byte[] b(byte[] bArr, int i10) throws GeneralSecurityException {
+        if (i10 > 16) {
+            throw new InvalidAlgorithmParameterException("outputLength too large, max is 16 bytes");
+        }
+        Cipher cipherA = s7.f13182e.a("AES/ECB/NoPadding");
+        cipherA.init(1, (SecretKey) this.f1147n);
+        int length = bArr.length;
+        int iMax = Math.max(1, (int) Math.ceil(((double) length) / 16.0d));
+        byte[] bArrK = iMax * 16 == length ? s1.k(bArr, (iMax - 1) * 16, (byte[]) this.f1148o, 0, 16) : s1.r(androidx.appcompat.widget.m.A(Arrays.copyOfRange(bArr, (iMax - 1) * 16, length)), (byte[]) this.p);
+        byte[] bArrDoFinal = new byte[16];
+        for (int i11 = 0; i11 < iMax - 1; i11++) {
+            bArrDoFinal = cipherA.doFinal(s1.k(bArrDoFinal, 0, bArr, i11 * 16, 16));
+        }
+        return Arrays.copyOf(cipherA.doFinal(s1.r(bArrK, bArrDoFinal)), i10);
+    }
+
+    @Override // v4.kd
+    public void c(String str) {
+        switch (this.m) {
+            case 8:
+                ((hc) this.f1148o).f(af.c.D(str));
+                break;
+            default:
+                ((hc) this.f1148o).f(af.c.D(str));
+                break;
+        }
+    }
+
+    public void d(n nVar) {
+        if (((ArrayList) this.f1147n).contains(nVar)) {
+            throw new IllegalStateException("Fragment already added: " + nVar);
+        }
+        synchronized (((ArrayList) this.f1147n)) {
+            ((ArrayList) this.f1147n).add(nVar);
+        }
+        nVar.w = true;
+    }
+
+    public void e() {
+        ((HashMap) this.f1148o).values().removeAll(Collections.singleton(null));
+    }
+
+    public boolean f(String str) {
+        return ((HashMap) this.f1148o).get(str) != null;
+    }
+
+    @Override // k5.a
+    public Object g(k5.i iVar) {
+        FirebaseInstanceId firebaseInstanceId = (FirebaseInstanceId) this.f1147n;
+        String str = (String) this.f1148o;
+        String str2 = (String) this.p;
+        Objects.requireNonNull(firebaseInstanceId);
+        try {
+            com.google.firebase.iid.a aVar = FirebaseInstanceId.f3265j;
+            String strE = firebaseInstanceId.f3269b.e();
+            synchronized (aVar) {
+                aVar.f3279c.put(strE, Long.valueOf(aVar.d(strE)));
+            }
+            String str3 = (String) FirebaseInstanceId.a(firebaseInstanceId.f3273f.getId());
+            a.C0053a c0053aH = firebaseInstanceId.h(str, str2);
+            if (!firebaseInstanceId.l(c0053aH)) {
+                return k5.l.e(new h7.h(str3, c0053aH.f3282a));
+            }
+            h7.j jVar = firebaseInstanceId.f3272e;
+            zd zdVar = new zd(firebaseInstanceId, str3, str, str2, c0053aH);
+            synchronized (jVar) {
+                Pair<String, String> pair = new Pair<>(str, str2);
+                k5.i<h7.g> iVar2 = jVar.f7116b.get(pair);
+                if (iVar2 != null) {
+                    if (Log.isLoggable("FirebaseInstanceId", 3)) {
+                        String strValueOf = String.valueOf(pair);
+                        StringBuilder sb2 = new StringBuilder(strValueOf.length() + 29);
+                        sb2.append("Joining ongoing request for: ");
+                        sb2.append(strValueOf);
+                        Log.d("FirebaseInstanceId", sb2.toString());
+                    }
+                    return iVar2;
+                }
+                if (Log.isLoggable("FirebaseInstanceId", 3)) {
+                    String strValueOf2 = String.valueOf(pair);
+                    StringBuilder sb3 = new StringBuilder(strValueOf2.length() + 24);
+                    sb3.append("Making new request for: ");
+                    sb3.append(strValueOf2);
+                    Log.d("FirebaseInstanceId", sb3.toString());
+                }
+                k5.i<h7.g> iVarH = zdVar.a().h(jVar.f7115a, new androidx.appcompat.widget.c0(jVar, pair, 8));
+                jVar.f7116b.put(pair, iVarH);
+                return iVarH;
+            }
+        } catch (InterruptedException e10) {
+            throw new IllegalStateException(e10);
+        }
+    }
+
+    @Override // v4.kd
+    public void h(Object obj) {
+        switch (this.m) {
+            case 8:
+                zd zdVar = (zd) this.f1147n;
+                zdVar.f13291n = ((me) obj).f13060n;
+                ((a7.a) ((e.q) this.p).f4579n).Z(null, zdVar, new e.q(this, 14));
+                break;
+            default:
+                me meVar = (me) obj;
+                af afVar = new af();
+                String str = meVar.f13060n;
+                f4.q.f(str);
+                afVar.m = str;
+                x6.v vVar = (x6.v) this.f1147n;
+                if (vVar.f13888o || vVar.m != null) {
+                    String str2 = vVar.m;
+                    if (str2 == null) {
+                        afVar.f12790s.f12939n.add("DISPLAY_NAME");
+                    } else {
+                        afVar.f12786n = str2;
+                    }
+                }
+                x6.v vVar2 = (x6.v) this.f1147n;
+                if (vVar2.p || vVar2.f13889q != null) {
+                    String str3 = vVar2.f13887n;
+                    if (str3 == null) {
+                        afVar.f12790s.f12939n.add("PHOTO_URL");
+                    } else {
+                        afVar.f12789r = str3;
+                    }
+                }
+                e.q.m((e.q) this.p, (hc) this.f1148o, meVar, afVar, this);
+                break;
+        }
+    }
+
+    public n i(String str) {
+        h0 h0Var = (h0) ((HashMap) this.f1148o).get(str);
+        if (h0Var != null) {
+            return h0Var.f1141c;
+        }
+        return null;
+    }
+
+    public n j(String str) {
+        for (h0 h0Var : ((HashMap) this.f1148o).values()) {
+            if (h0Var != null) {
+                n nVarJ = h0Var.f1141c;
+                if (!str.equals(nVarJ.f1200q)) {
+                    nVarJ = nVarJ.F.f1058c.j(str);
+                }
+                if (nVarJ != null) {
+                    return nVarJ;
+                }
+            }
+        }
+        return null;
+    }
+
+    public List k() {
+        ArrayList arrayList = new ArrayList();
+        for (h0 h0Var : ((HashMap) this.f1148o).values()) {
+            if (h0Var != null) {
+                arrayList.add(h0Var);
+            }
+        }
+        return arrayList;
+    }
+
+    public List l() {
+        ArrayList arrayList = new ArrayList();
+        for (h0 h0Var : ((HashMap) this.f1148o).values()) {
+            if (h0Var != null) {
+                arrayList.add(h0Var.f1141c);
+            } else {
+                arrayList.add(null);
+            }
+        }
+        return arrayList;
+    }
+
+    public long m() {
+        Object obj = this.p;
+        if (((k2.i) obj) != null) {
+            return ((k2.i) obj).a();
+        }
+        return -1L;
+    }
+
+    public h0 n(String str) {
+        return (h0) ((HashMap) this.f1148o).get(str);
+    }
+
+    public List o() {
+        ArrayList arrayList;
+        if (((ArrayList) this.f1147n).isEmpty()) {
+            return Collections.emptyList();
+        }
+        synchronized (((ArrayList) this.f1147n)) {
+            arrayList = new ArrayList((ArrayList) this.f1147n);
+        }
+        return arrayList;
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0067  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public void p(t3.f fVar, Uri uri, Map map, long j10, long j11, k2.j jVar) throws e3.e0 {
+        k2.e eVar = new k2.e(fVar, j10, j11);
+        this.p = eVar;
+        if (((k2.h) this.f1148o) != null) {
+            return;
+        }
+        k2.h[] hVarArrG = ((k2.k) this.f1147n).g(uri, map);
+        boolean z10 = true;
+        if (hVarArrG.length == 1) {
+            this.f1148o = hVarArrG[0];
+        } else {
+            int length = hVarArrG.length;
+            int i10 = 0;
+            while (true) {
+                if (i10 >= length) {
+                    break;
+                }
+                k2.h hVar = hVarArrG[i10];
+                try {
+                } catch (EOFException unused) {
+                    if (((k2.h) this.f1148o) != null || eVar.f8233d == j10) {
+                    }
+                } catch (Throwable th) {
+                    if (((k2.h) this.f1148o) == null && eVar.f8233d != j10) {
+                        z10 = false;
+                    }
+                    u3.a.g(z10);
+                    eVar.f8235f = 0;
+                    throw th;
+                }
+                if (hVar.j(eVar)) {
+                    this.f1148o = hVar;
+                    eVar.f8235f = 0;
+                    break;
+                }
+                boolean z11 = ((k2.h) this.f1148o) != null || eVar.f8233d == j10;
+                u3.a.g(z11);
+                eVar.f8235f = 0;
+                i10++;
+                u3.a.g(z11);
+                eVar.f8235f = 0;
+                i10++;
+            }
+            if (((k2.h) this.f1148o) == null) {
+                StringBuilder sbB = android.support.v4.media.a.b("None of the available extractors (");
+                int i11 = u3.a0.f12198a;
+                StringBuilder sb2 = new StringBuilder();
+                for (int i12 = 0; i12 < hVarArrG.length; i12++) {
+                    sb2.append(hVarArrG[i12].getClass().getSimpleName());
+                    if (i12 < hVarArrG.length - 1) {
+                        sb2.append(", ");
+                    }
+                }
+                sbB.append(sb2.toString());
+                sbB.append(") could read the stream.");
+                String string = sbB.toString();
+                Objects.requireNonNull(uri);
+                throw new e3.e0(string, uri);
+            }
+        }
+        ((k2.h) this.f1148o).b(jVar);
+    }
+
+    public void q(h0 h0Var) {
+        n nVar = h0Var.f1141c;
+        if (f(nVar.f1200q)) {
+            return;
+        }
+        ((HashMap) this.f1148o).put(nVar.f1200q, h0Var);
+        if (b0.P(2)) {
+            Log.v("FragmentManager", "Added fragment to active set " + nVar);
+        }
+    }
+
+    public void r(h0 h0Var) {
+        n nVar = h0Var.f1141c;
+        if (nVar.M) {
+            ((e0) this.p).d(nVar);
+        }
+        if (((h0) ((HashMap) this.f1148o).put(nVar.f1200q, null)) != null && b0.P(2)) {
+            Log.v("FragmentManager", "Removed fragment from active set " + nVar);
+        }
+    }
+
+    public void s(n nVar) {
+        synchronized (((ArrayList) this.f1147n)) {
+            ((ArrayList) this.f1147n).remove(nVar);
+        }
+        nVar.w = false;
+    }
+
+    public List t(byte[] bArr) {
+        List list = (List) ((ConcurrentMap) this.f1147n).get(new h2(bArr));
+        return list != null ? list : Collections.emptyList();
+    }
+
+    public String toString() {
+        switch (this.m) {
+            case 1:
+                if (((List) this.f1147n).isEmpty()) {
+                    return "Success";
+                }
+                return ((List) this.f1147n).size() + " errors";
+            default:
+                return super.toString();
+        }
+    }
+
+    @Override // v4.bd
+    public String zza() throws JSONException {
+        JSONObject jSONObject = new JSONObject();
+        jSONObject.put("email", (String) this.f1147n);
+        jSONObject.put("password", (String) this.f1148o);
+        jSONObject.put("returnSecureToken", true);
+        String str = (String) this.p;
+        if (str != null) {
+            jSONObject.put("tenantId", str);
+        }
+        return jSONObject.toString();
+    }
+}

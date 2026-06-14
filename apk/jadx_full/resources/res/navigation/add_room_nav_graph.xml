@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_room_nav_graph"
+    app:startDestination="@+id/addRoomFormFragment">
+    <fragment
+        android:label="fragment_add_room_form"
+        android:name="de.com.ideal.airpro.ui.add_room.fragments.AddRoomFormFragment"
+        android:id="@+id/addRoomFormFragment">
+        <action
+            android:id="@+id/action_addRoomFormFragment_to_addRoomSuccessFragment"
+            app:destination="@+id/addRoomSuccessFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/addRoomFormFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:label="fragment_add_room_success"
+        android:name="de.com.ideal.airpro.ui.add_room.fragments.AddRoomSuccessFragment"
+        android:id="@+id/addRoomSuccessFragment"/>
+</navigation>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:tag="layout/map_value_element_0"
+    android:background="@drawable/rounded_corners_rectangle2"
+    android:padding="3dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:textSize="10sp"
+        android:id="@+id/box_title"
+        android:tag="binding_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/vertical_guideline"
+        app:layout_constraintRight_toRightOf="@+id/vertical_guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/SubreadingsAppearance"/>
+    <TextView
+        android:textSize="12sp"
+        android:id="@+id/box_value"
+        android:tag="binding_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/vertical_guideline"
+        app:layout_constraintRight_toRightOf="@+id/vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/box_title"
+        style="@style/SubreadingsAppearance"/>
+    <TextView
+        android:textSize="10sp"
+        android:id="@+id/box_sign"
+        android:tag="binding_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/vertical_guideline"
+        app:layout_constraintRight_toRightOf="@+id/vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/box_value"
+        style="@style/SubreadingsAppearanceXSmall"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:orientation="vertical"
+        android:id="@+id/vertical_guideline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.5"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

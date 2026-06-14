@@ -1,0 +1,23 @@
+package n9;
+
+import android.view.View;
+import na.c;
+
+/* JADX INFO: compiled from: RecyclerViewDeviceModelListAdapter.kt */
+/* JADX INFO: loaded from: classes.dex */
+public final class b implements View.OnClickListener {
+    public final /* synthetic */ a m;
+
+    /* JADX INFO: renamed from: n, reason: collision with root package name */
+    public final /* synthetic */ c f9294n;
+
+    public b(a aVar, c cVar) {
+        this.m = aVar;
+        this.f9294n = cVar;
+    }
+
+    @Override // android.view.View.OnClickListener
+    public final void onClick(View view) {
+        this.m.f9290e.b(this.f9294n);
+    }
+}

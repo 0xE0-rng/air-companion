@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:theme="@style/ToolbarTheme"
+        android:id="@+id/activity_recommendations_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textAppearance="@android:style/TextAppearance"
+                android:textSize="@dimen/text_size_32sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/recommendations"
+                android:layout_marginHorizontal="@dimen/margin_16dp"/>
+            <TextView
+                android:textAppearance="@android:style/TextAppearance"
+                android:textSize="@dimen/text_size_15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/no_recommendations"
+                android:layout_marginHorizontal="@dimen/margin_16dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,9 @@
+{
+  "domain": "ideal_airpro",
+  "name": "Ideal AirPro",
+  "codeowners": [],
+  "dependencies": [],
+  "documentation": "https://github.com/your-repo/ideal-airpro",
+  "iot_class": "local_polling",
+  "version": "1.0.0"
+}

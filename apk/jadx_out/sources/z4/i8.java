@@ -1,0 +1,21 @@
+package z4;
+
+/* JADX INFO: compiled from: com.google.android.gms:play-services-measurement-impl@@18.0.3 */
+/* JADX INFO: loaded from: classes.dex */
+public final class i8 implements s2<j8> {
+
+    /* JADX INFO: renamed from: n, reason: collision with root package name */
+    public static final i8 f14292n = new i8();
+    public final s2<j8> m = b7.a.K(new v2(new k8()));
+
+    public static boolean a() {
+        f14292n.zza().zza();
+        return true;
+    }
+
+    @Override // z4.s2
+    /* JADX INFO: renamed from: b, reason: merged with bridge method [inline-methods] */
+    public final j8 zza() {
+        return this.m.zza();
+    }
+}

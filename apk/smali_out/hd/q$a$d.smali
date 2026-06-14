@@ -1,0 +1,60 @@
+.class public final Lhd/q$a$d;
+.super Lhd/q$a;
+.source "IntersectionType.kt"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lhd/q$a;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x19
+    name = "d"
+.end annotation
+
+
+# direct methods
+.method public constructor <init>(Ljava/lang/String;I)V
+    .registers 4
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()V"
+        }
+    .end annotation
+
+    const/4 v0, 0x0
+
+    .line 1
+    invoke-direct {p0, p1, p2, v0}, Lhd/q$a;-><init>(Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public combine(Lgd/i1;)Lhd/q$a;
+    .registers 3
+
+    const-string v0, "nextType"
+
+    invoke-static {p1, v0}, Lj2/y;->f(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 1
+    invoke-virtual {p0, p1}, Lhd/q$a;->getResultNullability(Lgd/i1;)Lhd/q$a;
+
+    move-result-object p1
+
+    .line 2
+    sget-object v0, Lhd/q$a;->ACCEPT_NULL:Lhd/q$a;
+
+    if-ne p1, v0, :cond_e
+
+    goto :goto_f
+
+    :cond_e
+    move-object p0, p1
+
+    :goto_f
+    return-object p0
+.end method

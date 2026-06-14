@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/edit_room_nav_graph"
+    app:startDestination="@+id/editRoomFragment">
+    <fragment
+        android:label="fragment_edit_room"
+        android:name="de.com.ideal.airpro.ui.edit_room.fragment.EditRoomFragment"
+        android:id="@+id/editRoomFragment">
+        <action
+            android:id="@+id/action_editRoomFragment_to_selectRoomFragment"
+            app:destination="@+id/selectRoomFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/editRoomFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:label="fragment_select_room"
+        android:name="de.com.ideal.airpro.ui.edit_room.fragment.SelectRoomFragment"
+        android:id="@+id/selectRoomFragment">
+        <action
+            android:id="@+id/action_selectRoomFragment_to_editRoomFragment"
+            app:destination="@+id/editRoomFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/selectRoomFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

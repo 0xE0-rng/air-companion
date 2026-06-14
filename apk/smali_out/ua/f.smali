@@ -1,0 +1,54 @@
+.class public final synthetic Lua/f;
+.super Ljava/lang/Object;
+
+
+# static fields
+.field public static final synthetic a:[I
+
+
+# direct methods
+.method public static synthetic constructor <clinit>()V
+    .registers 3
+
+    invoke-static {}, Lua/g;->values()[Lua/g;
+
+    move-result-object v0
+
+    array-length v0, v0
+
+    new-array v0, v0, [I
+
+    sput-object v0, Lua/f;->a:[I
+
+    sget-object v1, Lua/g;->SYNCHRONIZED:Lua/g;
+
+    invoke-virtual {v1}, Ljava/lang/Enum;->ordinal()I
+
+    move-result v1
+
+    const/4 v2, 0x1
+
+    aput v2, v0, v1
+
+    sget-object v1, Lua/g;->PUBLICATION:Lua/g;
+
+    invoke-virtual {v1}, Ljava/lang/Enum;->ordinal()I
+
+    move-result v1
+
+    const/4 v2, 0x2
+
+    aput v2, v0, v1
+
+    sget-object v1, Lua/g;->NONE:Lua/g;
+
+    invoke-virtual {v1}, Ljava/lang/Enum;->ordinal()I
+
+    move-result v1
+
+    const/4 v2, 0x3
+
+    aput v2, v0, v1
+
+    return-void
+.end method

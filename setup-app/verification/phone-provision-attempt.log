@@ -1,0 +1,395 @@
+15:09:44.376 STATE READY                ── IdealSetup v1.0  (log: /storage/emulated/0/Android/data/eu.neongolden.idealsetup.debug/files/ideal-setup.log)
+15:09:44.379 INFO  READY                device AP prefixes — purifier='IDEAL', sensor='ideal-add-device'
+15:10:30.295 WARN  PERM                 requesting: [android.permission.ACCESS_FINE_LOCATION]
+15:10:30.364 STATE REAL                 ── === REAL provisioning: join 'IDEAL', then push 'UnserKleinesFunkloch' ===
+15:10:30.364 STATE WIFI                 ── requesting OPEN AP join: 'IDEAL'
+15:10:39.841 STATE READY                ── IdealSetup v1.0  (log: /storage/emulated/0/Android/data/eu.neongolden.idealsetup.debug/files/ideal-setup.log)
+15:10:39.843 INFO  READY                device AP prefixes — purifier='IDEAL', sensor='ideal-add-device'
+15:10:41.256 STATE REAL                 ── === REAL provisioning: join 'IDEAL', then push 'MyHomeWiFi' ===
+15:10:41.257 STATE WIFI                 ── requesting OPEN AP join: 'IDEAL'
+15:10:52.123 STATE READY                ── IdealSetup v1.0  (log: /storage/emulated/0/Android/data/eu.neongolden.idealsetup.debug/files/ideal-setup.log)
+15:10:52.125 INFO  READY                device AP prefixes — purifier='IDEAL', sensor='ideal-add-device'
+15:12:30.682 STATE REAL                 ── === REAL provisioning: join 'IDEAL', then push 'MyHomeWiFi' ===
+15:12:30.684 STATE WIFI                 ── requesting OPEN AP join: 'IDEAL'
+15:12:35.691 STATE READY                ── IdealSetup v1.0  (log: /storage/emulated/0/Android/data/eu.neongolden.idealsetup.debug/files/ideal-setup.log)
+15:12:35.694 INFO  READY                device AP prefixes — purifier='IDEAL', sensor='ideal-add-device'
+15:13:26.694 STATE REAL                 ── === REAL provisioning: join 'IDEAL', then push 'MyHomeWiFi' ===
+15:13:26.696 STATE WIFI                 ── requesting OPEN AP join: 'IDEAL'
+15:15:38.031 STATE READY                ── IdealSetup v1.0  (log: /storage/emulated/0/Android/data/eu.neongolden.idealsetup.debug/files/ideal-setup.log)
+15:15:38.033 INFO  READY                device AP prefixes — purifier='IDEAL', sensor='ideal-add-device'
+15:15:38.047 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, Vodafone-F526, Vodafone Homespot, A15 de Anna, Vodafone-550C, Ping Floyd, IDEAL, Vodafone Hotspot, FRITZ!Box 6490 Cable, MagentaWLAN-DWKH, LOVENET, Erdloch, Wurstnetz, Comfortably LAN, FRITZ!Box 7530 EY, Wann Urlaub?, salve-hospes, MagentaWLAN-Z9S8, Griffendoor, Vodafone-C85C-Extender, o2-WLAN44, Vodafone-C81A, FRITZ!Box 7590 QU, MagentaWLAN-6XKV, Vodafone-590640, SalzundPfeffer, Flamingo, Jutta1710, ExCryptYYBER, DIRECT-xK-BRAVIA, Jan Wlan, cafegrumpy_nomap, FRITZ!Box 7590 CV, Vodafone-BCD6, AnPaBuSch, ubernetwork, FRITZ!Box 6670 GR, I Come From A Lan Down Under
+15:15:38.081 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, Vodafone-F526, Vodafone Homespot, A15 de Anna, Vodafone-550C, Ping Floyd, IDEAL, Vodafone Hotspot, FRITZ!Box 6490 Cable, MagentaWLAN-DWKH, LOVENET, Erdloch, Wurstnetz, Comfortably LAN, FRITZ!Box 7530 EY, Wann Urlaub?, salve-hospes, MagentaWLAN-Z9S8, Griffendoor, Vodafone-C85C-Extender, o2-WLAN44, Vodafone-C81A, FRITZ!Box 7590 QU, MagentaWLAN-6XKV, Vodafone-590640, SalzundPfeffer, Flamingo, Jutta1710, ExCryptYYBER, DIRECT-xK-BRAVIA, Jan Wlan, cafegrumpy_nomap, FRITZ!Box 7590 CV, Vodafone-BCD6, AnPaBuSch, ubernetwork, FRITZ!Box 6670 GR, I Come From A Lan Down Under
+15:15:40.500 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, KDG-990B6, Ping Floyd, IDEAL, MagentaWLAN-DWKH, LOVENET, Wurstnetz, Erdloch, DIRECT-xK-BRAVIA, Vodafone Homespot, Wann Urlaub?, FRITZ!Box 7590 CV, MagentaWLAN-Z9S8, Griffendoor, Vodafone-BCD6, AnPaBuSch, SalzundPfeffer, o2-WLAN44, Vodafone Hotspot, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:15:51.631 STATE REAL                 ── === REAL provisioning: join 'IDEAL', then push 'UnserKleinesFunkloch' ===
+15:15:51.632 STATE WIFI                 ── requesting OPEN AP join: 'IDEAL'
+15:16:27.464 DEBUG WIFI                 onAvailable -> binding process to AP network
+15:16:27.473 DEBUG WIFI                 SSID list: IDEAL, FRITZ!Box 6490 Cable, SalzundPfeffer, UnserKleinesFunkloch, Flamingo, Ping Floyd, MagentaWLAN-DWKH, FRITZ!Box 7510 SJ, Wurstnetz, Erdloch, FRITZ!Box 6591 Cable EX, Comfortably LAN, Vodafone Homespot, Wann Urlaub?, FRITZ!Box 7590 CV, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, o2-WLAN44, Vodafone Hotspot, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:16:27.492 STATE CONFIG               ── setupPurifier ssid='UnserKleinesFunkloch' moduleId='IDEAL_AP'
+15:16:27.493 STATE DISCOVER             ── broadcasting HF-A11ASSISTHREAD to 255.255.255.255:48899
+15:16:27.505 TX    DISCOVERY            -> 255.255.255.255:48899 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:16:27.506 DEBUG DISCOVERY            HF-A11ASSISTHREAD sent, listening 1500ms
+15:16:27.517 RX    DISCOVERY            <- 10.10.100.150 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:16:27.519 WARN  DISCOVERY            ignored reply with 1 fields: HF-A11ASSISTHREAD
+15:16:29.053 DEBUG DISCOVERY            scan finished (timeout), 0 device(s)
+15:16:29.089 DEBUG CMD-MODE             no devices found
+15:16:31.091 STATE DISCOVER             ── broadcasting HF-A11ASSISTHREAD to 255.255.255.255:48899
+15:16:31.096 TX    DISCOVERY            -> 255.255.255.255:48899 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:16:31.097 DEBUG DISCOVERY            HF-A11ASSISTHREAD sent, listening 1500ms
+15:16:31.098 RX    DISCOVERY            <- 10.10.100.150 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:16:31.098 WARN  DISCOVERY            ignored reply with 1 fields: HF-A11ASSISTHREAD
+15:16:31.129 RX    DISCOVERY            <- 10.10.100.254 (32B)
+    0000  31 30 2e 31 30 2e 31 30 30 2e 32 35 34 2c 32 38  |10.10.100.254,28|
+    0010  39 43 36 45 36 44 30 45 38 32 2c 49 44 45 41 4c  |9C6E6D0E82,IDEAL|
+15:16:31.131 DEBUG DISCOVERY            parsed -> ip=10.10.100.254 mac=289C6E6D0E82 name=IDEAL
+15:16:32.663 DEBUG DISCOVERY            scan finished (timeout), 1 device(s)
+15:15:38.031 TX    UDP                  -> 255.255.255.255:48899 (3B)
+    0000  2b 6f 6b                                         |+ok|
+15:16:32.903 RX    UDP                  <- 255.255.255.255 (3B)
+    0000  2b 6f 6b                                         |+ok|
+15:16:32.934 TX    UDP                  -> 10.10.100.254:48899 (7B)
+    0000  41 54 2b 56 45 52 0a                             |AT+VER.|
+15:16:33.937 WARN  UDP                  command timeout for 'AT+VER' -> 10.10.100.254
+15:16:33.972 WARN  CMD-MODE             AT+VER not acked, not ready
+15:16:35.975 STATE DISCOVER             ── broadcasting HF-A11ASSISTHREAD to 255.255.255.255:48899
+15:16:35.993 TX    DISCOVERY            -> 255.255.255.255:48899 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:16:35.996 DEBUG DISCOVERY            HF-A11ASSISTHREAD sent, listening 1500ms
+15:16:36.003 RX    DISCOVERY            <- 10.10.100.150 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:16:36.004 WARN  DISCOVERY            ignored reply with 1 fields: HF-A11ASSISTHREAD
+15:16:36.192 RX    DISCOVERY            <- 10.10.100.254 (32B)
+    0000  31 30 2e 31 30 2e 31 30 30 2e 32 35 34 2c 32 38  |10.10.100.254,28|
+    0010  39 43 36 45 36 44 30 45 38 32 2c 49 44 45 41 4c  |9C6E6D0E82,IDEAL|
+15:16:36.195 DEBUG DISCOVERY            parsed -> ip=10.10.100.254 mac=289C6E6D0E82 name=IDEAL
+15:16:37.726 DEBUG DISCOVERY            scan finished (timeout), 1 device(s)
+15:16:37.955 TX    UDP                  -> 255.255.255.255:48899 (3B)
+    0000  2b 6f 6b                                         |+ok|
+15:16:37.958 RX    UDP                  <- 255.255.255.255 (3B)
+    0000  2b 6f 6b                                         |+ok|
+15:16:37.997 TX    UDP                  -> 10.10.100.254:48899 (7B)
+    0000  41 54 2b 56 45 52 0a                             |AT+VER.|
+15:16:38.006 RX    UDP                  <- 10.10.100.254 (9B)
+    0000  2b 45 52 52 3d 2d 31 0a 0a                       |+ERR=-1..|
+15:16:38.018 WARN  CMD-MODE             AT+VER not acked, not ready
+15:16:40.022 STATE DISCOVER             ── broadcasting HF-A11ASSISTHREAD to 255.255.255.255:48899
+15:16:40.038 TX    DISCOVERY            -> 255.255.255.255:48899 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:16:40.039 DEBUG DISCOVERY            HF-A11ASSISTHREAD sent, listening 1500ms
+15:16:40.041 RX    DISCOVERY            <- 10.10.100.150 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:16:40.041 WARN  DISCOVERY            ignored reply with 1 fields: HF-A11ASSISTHREAD
+15:16:40.104 RX    DISCOVERY            <- 10.10.100.254 (32B)
+    0000  31 30 2e 31 30 2e 31 30 30 2e 32 35 34 2c 32 38  |10.10.100.254,28|
+    0010  39 43 36 45 36 44 30 45 38 32 2c 49 44 45 41 4c  |9C6E6D0E82,IDEAL|
+15:16:40.105 DEBUG DISCOVERY            parsed -> ip=10.10.100.254 mac=289C6E6D0E82 name=IDEAL
+15:16:41.636 DEBUG DISCOVERY            scan finished (timeout), 1 device(s)
+15:15:38.031 TX    UDP                  -> 255.255.255.255:48899 (3B)
+    0000  2b 6f 6b                                         |+ok|
+15:16:41.886 RX    UDP                  <- 255.255.255.255 (3B)
+    0000  2b 6f 6b                                         |+ok|
+15:16:41.923 TX    UDP                  -> 10.10.100.254:48899 (7B)
+    0000  41 54 2b 56 45 52 0a                             |AT+VER.|
+15:16:41.982 RX    UDP                  <- 10.10.100.254 (34B)
+    0000  2b 6f 6b 3d 32 2e 30 2e 31 30 2c 38 20 28 32 30  |+ok=2.0.10,8 (20|
+    0010  31 38 2d 30 34 2d 32 37 20 31 34 34 32 29 0d 0a  |18-04-27 1442)..|
+    0020  0d 0a                                            |..|
+15:16:42.008 DEBUG CMD-MODE             command mode confirmed on 10.10.100.254 (AT+VER ok)
+15:16:44.025 TX    UDP                  -> 10.10.100.254:48899 (32B)
+    0000  41 54 2b 57 53 53 53 49 44 3d 55 6e 73 65 72 4b  |AT+WSSSID=UnserK|
+    0010  6c 65 69 6e 65 73 46 75 6e 6b 6c 6f 63 68 0d 0a  |leinesFunkloch..|
+15:16:44.255 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:16:44.278 DEBUG @@@@@                CR: +ok(true)
+15:16:38.031 TX    UDP                  -> 10.10.100.254:48899 (11B)
+    0000  41 54 2b 57 53 53 53 49 44 0d 0a                 |AT+WSSSID..|
+15:16:44.428 RX    UDP                  <- 10.10.100.254 (28B)
+    0000  2b 6f 6b 3d 55 6e 73 65 72 4b 6c 65 69 6e 65 73  |+ok=UnserKleines|
+    0010  46 75 6e 6b 6c 6f 63 68 0d 0a 0d 0a              |Funkloch....|
+15:16:44.442 DEBUG @@@@@                CR: +ok=UnserKleinesFunkloch(true)
+15:16:44.443 DEBUG IdealManager-setupAP AT+WSSSID:ok
+15:16:44.448 TX    UDP                  -> 10.10.100.254:48899 (14B)
+    0000  41 54 2b 44 49 53 50 53 3d 59 65 73 0d 0a        |AT+DISPS=Yes..|
+15:16:44.500 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:16:44.516 DEBUG @@@@@                CR: +ok(true)
+15:16:44.623 TX    UDP                  -> 10.10.100.254:48899 (10B)
+    0000  41 54 2b 44 49 53 50 53 0d 0a                    |AT+DISPS..|
+15:16:44.655 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 6f 6b 3d 59 65 73 0d 0a 0d 0a                 |+ok=Yes....|
+15:16:44.667 DEBUG @@@@@                CR: +ok=Yes(true)
+15:16:44.667 DEBUG IdealManager-setupAP AT+DISPS:ok
+15:16:44.670 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:44.727 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 45 52 52 3d 2d 34 0d 0a 0d 0a                 |+ERR=-4....|
+15:16:44.745 DEBUG @@@@@                CR: +ERR=-4(false)
+15:16:44.745 DEBUG IdealManager-setupAP Retry 9
+15:16:44.750 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:44.807 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 45 52 52 3d 2d 34 0d 0a 0d 0a                 |+ERR=-4....|
+15:16:44.827 DEBUG @@@@@                CR: +ERR=-4(false)
+15:16:44.828 DEBUG IdealManager-setupAP Retry 8
+15:16:44.833 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:44.865 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 45 52 52 3d 2d 34 0d 0a 0d 0a                 |+ERR=-4....|
+15:16:44.880 DEBUG @@@@@                CR: +ERR=-4(false)
+15:16:44.881 DEBUG IdealManager-setupAP Retry 7
+15:16:44.884 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:44.986 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 45 52 52 3d 2d 34 0d 0a 0d 0a                 |+ERR=-4....|
+15:16:45.004 DEBUG @@@@@                CR: +ERR=-4(false)
+15:16:45.004 DEBUG IdealManager-setupAP Retry 6
+15:16:45.010 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:46.012 WARN  UDP                  command timeout for 'AT+WSKEY=WPA2PSK,AES,' -> 10.10.100.254
+15:16:46.058 DEBUG @@@@@                CR: (false)
+15:16:46.059 DEBUG IdealManager-setupAP Retry 5
+15:16:46.065 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:46.098 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 45 52 52 3d 2d 34 0d 0a 0d 0a                 |+ERR=-4....|
+15:16:46.117 DEBUG @@@@@                CR: +ERR=-4(false)
+15:16:46.118 DEBUG IdealManager-setupAP Retry 4
+15:16:46.121 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:46.144 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 45 52 52 3d 2d 34 0d 0a 0d 0a                 |+ERR=-4....|
+15:16:46.154 DEBUG @@@@@                CR: +ERR=-4(false)
+15:16:46.155 DEBUG IdealManager-setupAP Retry 3
+15:16:45.004 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:47.163 WARN  UDP                  command timeout for 'AT+WSKEY=WPA2PSK,AES,' -> 10.10.100.254
+15:16:47.197 DEBUG @@@@@                CR: (false)
+15:16:47.198 DEBUG IdealManager-setupAP Retry 2
+15:16:46.154 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:47.265 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 45 52 52 3d 2d 34 0d 0a 0d 0a                 |+ERR=-4....|
+15:16:47.291 DEBUG @@@@@                CR: +ERR=-4(false)
+15:16:47.291 DEBUG IdealManager-setupAP Retry 1
+15:16:47.297 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:48.300 WARN  UDP                  command timeout for 'AT+WSKEY=WPA2PSK,AES,' -> 10.10.100.254
+15:16:48.335 DEBUG @@@@@                CR: (false)
+15:16:48.336 DEBUG IdealManager-setupAP Retry 0
+15:16:48.341 TX    UDP                  -> 10.10.100.254:48899 (23B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 0d 0a                             |,AES,..|
+15:16:48.404 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 45 52 52 3d 2d 34 0d 0a 0d 0a                 |+ERR=-4....|
+15:16:48.427 DEBUG @@@@@                CR: +ERR=-4(false)
+15:16:48.427 DEBUG IdealManager-setupAP AT+WSKEY:fail
+15:16:44.865 TX    UDP                  -> 10.10.100.254:48899 (14B)
+    0000  41 54 2b 57 4d 4f 44 45 3d 53 54 41 0d 0a        |AT+WMODE=STA..|
+15:16:48.663 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:16:48.692 DEBUG @@@@@                CR: +ok(true)
+15:15:38.031 TX    UDP                  -> 10.10.100.254:48899 (10B)
+    0000  41 54 2b 57 4d 4f 44 45 0d 0a                    |AT+WMODE..|
+15:16:49.804 WARN  UDP                  command timeout for 'AT+WMODE' -> 10.10.100.254
+15:16:49.855 DEBUG @@@@@                CR: (false)
+15:16:49.856 DEBUG IdealManager-setupAP Retry 9
+15:16:49.861 TX    UDP                  -> 10.10.100.254:48899 (14B)
+    0000  41 54 2b 57 4d 4f 44 45 3d 53 54 41 0d 0a        |AT+WMODE=STA..|
+15:16:49.923 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:16:49.948 DEBUG @@@@@                CR: +ok(true)
+15:16:50.059 TX    UDP                  -> 10.10.100.254:48899 (10B)
+    0000  41 54 2b 57 4d 4f 44 45 0d 0a                    |AT+WMODE..|
+15:16:50.117 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 6f 6b 3d 53 54 41 0d 0a 0d 0a                 |+ok=STA....|
+15:16:50.137 DEBUG @@@@@                CR: +ok=STA(true)
+15:16:50.138 DEBUG IdealManager-setupAP AT+WMODE:ok
+15:16:50.145 TX    UDP                  -> 10.10.100.254:48899 (19B)
+    0000  41 54 2b 57 52 4d 49 44 3d 49 44 45 41 4c 5f 41  |AT+WRMID=IDEAL_A|
+    0010  50 0d 0a                                         |P..|
+15:16:50.362 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:16:50.389 DEBUG @@@@@                CR: +ok(true)
+15:16:50.500 TX    UDP                  -> 10.10.100.254:48899 (8B)
+    0000  41 54 2b 4d 49 44 0d 0a                          |AT+MID..|
+15:16:50.517 RX    UDP                  <- 10.10.100.254 (16B)
+    0000  2b 6f 6b 3d 49 44 45 41 4c 5f 41 50 0d 0a 0d 0a  |+ok=IDEAL_AP....|
+15:16:50.536 DEBUG @@@@@                CR: +ok=IDEAL_AP(true)
+15:16:50.537 DEBUG IdealManager-setupAP AT+WRMID:ok
+15:16:50.537 ERROR IdealManager-setupAP Setup commands failed
+15:16:50.537 STATE REAL                 ── flow finished for 10.10.100.254
+15:16:50.539 DEBUG WIFI                 network callback unregistered
+15:16:50.540 STATE WIFI                 ── released AP, process unbound
+15:17:47.715 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, SalzundPfeffer, Flamingo, Ping Floyd, IDEAL, MagentaWLAN-DWKH, FRITZ!Box 7510 SJ, Wurstnetz, Erdloch, FRITZ!Box 6591 Cable EX, Comfortably LAN, Vodafone Homespot, Wann Urlaub?, FRITZ!Box 7590 CV, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, o2-WLAN44, Vodafone Hotspot, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:19:53.722 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, SalzundPfeffer, Flamingo, Ping Floyd, IDEAL, MagentaWLAN-DWKH, FRITZ!Box 7510 SJ, Wurstnetz, Erdloch, FRITZ!Box 6591 Cable EX, Comfortably LAN, Vodafone Homespot, Wann Urlaub?, FRITZ!Box 7590 CV, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, o2-WLAN44, Vodafone Hotspot, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:21:36.971 STATE READY                ── IdealSetup v1.0  (log: /storage/emulated/0/Android/data/eu.neongolden.idealsetup.debug/files/ideal-setup.log)
+15:21:36.976 INFO  READY                device AP prefixes — purifier='IDEAL', sensor='ideal-add-device'
+15:21:36.993 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, SalzundPfeffer, Flamingo, Ping Floyd, IDEAL, MagentaWLAN-DWKH, FRITZ!Box 7510 SJ, Wurstnetz, Erdloch, FRITZ!Box 6591 Cable EX, Comfortably LAN, Vodafone Homespot, Wann Urlaub?, FRITZ!Box 7590 CV, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, o2-WLAN44, Vodafone Hotspot, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:21:37.052 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, SalzundPfeffer, Flamingo, Ping Floyd, IDEAL, MagentaWLAN-DWKH, FRITZ!Box 7510 SJ, Wurstnetz, Erdloch, FRITZ!Box 6591 Cable EX, Comfortably LAN, Vodafone Homespot, Wann Urlaub?, FRITZ!Box 7590 CV, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, o2-WLAN44, Vodafone Hotspot, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:21:39.592 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, Vodafone Hotspot, A15 de Anna, LS50WII_8417151557B5, Flamingo, Ping Floyd, Vodafone-550C, Wurstnetz, DIRECT-xK-BRAVIA, Vodafone Homespot, KabelBox-D514, Wann Urlaub?, MagentaWLAN-Z9S8, Griffendoor, FRITZ!Box 7590 CV, AnPaBuSch, o2-WLAN44, MagentaWLAN-6XKV
+15:21:42.458 STATE READY                ── IdealSetup v1.0  (log: /storage/emulated/0/Android/data/eu.neongolden.idealsetup.debug/files/ideal-setup.log)
+15:21:42.459 INFO  READY                device AP prefixes — purifier='IDEAL', sensor='ideal-add-device'
+15:21:42.464 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, Vodafone Hotspot, A15 de Anna, LS50WII_8417151557B5, Flamingo, Ping Floyd, Vodafone-550C, Wurstnetz, DIRECT-xK-BRAVIA, Vodafone Homespot, KabelBox-D514, Wann Urlaub?, MagentaWLAN-Z9S8, Griffendoor, FRITZ!Box 7590 CV, AnPaBuSch, o2-WLAN44, MagentaWLAN-6XKV
+15:21:42.487 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, Vodafone Hotspot, A15 de Anna, LS50WII_8417151557B5, Flamingo, Ping Floyd, Vodafone-550C, Wurstnetz, DIRECT-xK-BRAVIA, Vodafone Homespot, KabelBox-D514, Wann Urlaub?, MagentaWLAN-Z9S8, Griffendoor, FRITZ!Box 7590 CV, AnPaBuSch, o2-WLAN44, MagentaWLAN-6XKV
+15:21:44.192 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, Vodafone Hotspot, LS50WII_8417151557B5, Flamingo, Ping Floyd, Vodafone Homespot, MagentaWLAN-DWKH, Wurstnetz, Erdloch, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, SalzundPfeffer, o2-WLAN44, ubernetwork, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:23:42.272 STATE READY                ── IdealSetup v1.0  (log: /storage/emulated/0/Android/data/eu.neongolden.idealsetup.debug/files/ideal-setup.log)
+15:23:42.272 INFO  READY                device AP prefixes — purifier='IDEAL', sensor='ideal-add-device'
+15:23:42.285 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, Vodafone Hotspot, LS50WII_8417151557B5, Flamingo, Ping Floyd, Vodafone Homespot, MagentaWLAN-DWKH, Wurstnetz, Erdloch, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, SalzundPfeffer, o2-WLAN44, ubernetwork, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:23:42.334 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, Vodafone Hotspot, LS50WII_8417151557B5, Flamingo, Ping Floyd, Vodafone Homespot, MagentaWLAN-DWKH, Wurstnetz, Erdloch, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, SalzundPfeffer, o2-WLAN44, ubernetwork, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:23:43.837 STATE READY                ── IdealSetup v1.0  (log: /storage/emulated/0/Android/data/eu.neongolden.idealsetup.debug/files/ideal-setup.log)
+15:23:43.838 INFO  READY                device AP prefixes — purifier='IDEAL', sensor='ideal-add-device'
+15:23:43.843 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, Vodafone Hotspot, LS50WII_8417151557B5, Flamingo, Ping Floyd, Vodafone Homespot, MagentaWLAN-DWKH, Wurstnetz, Erdloch, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, SalzundPfeffer, o2-WLAN44, ubernetwork, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:23:43.891 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6490 Cable, Vodafone Hotspot, LS50WII_8417151557B5, Flamingo, Ping Floyd, Vodafone Homespot, MagentaWLAN-DWKH, Wurstnetz, Erdloch, MagentaWLAN-Z9S8, Griffendoor, AnPaBuSch, SalzundPfeffer, o2-WLAN44, ubernetwork, MagentaWLAN-6XKV, I Come From A Lan Down Under
+15:23:44.992 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, FRITZ!Box 6690 HI, o2-WLAN35, o2-WLAN76, Vodafone-F526, AirNet-2G, IDEAL, Vodafone Homespot, FRITZ!Box 7560 (Gast), ExCryptYYBER, FRITZ!Box 7510 SJ, Erdloch, Wurstnetz, FRITZ!Box 7530 EY, Jan Wlan, cafegrumpy_nomap, MyParadise, MagentaWLAN-Z9S8, AirNet, AnPaBuSch, Vodafone-F4E9_EXT, FRITZ!Box 6820 AF, Vodafone Hotspot, FRITZ!Box 7590 QU, I Come From A Lan Down Under
+15:23:47.378 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, Vodafone-F526, Vodafone-590640, o2-WLAN35, Vodafone Homespot, o2-WLAN76, Vodafone Hotspot, IDEAL, FRITZ!Box 7430 JB, FRITZ!Box 7510 SJ, Erdloch, FRITZ!Box 7530 EY, cafegrumpy_nomap, Jan Wlan, MyParadise, MagentaWLAN-Z9S8, AnPaBuSch, DIRECT-8D-HP ENVY 4520 series, Vodafone-C81A, QueenofPrussia, FRITZ!Box 6820 AF, FRITZ!Box 7590 QU, DIRECT-o9-EPSON-ET-5150 Series
+15:25:23.053 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, Vodafone-F526, Vodafone Homespot, Vodafone Hotspot, IDEAL, FRITZ!Box 7430 JB, FRITZ!Box 7510 SJ, Erdloch, FRITZ!Box 7530 EY, Jan Wlan, cafegrumpy_nomap, DIRECT-8D-HP ENVY 4520 series, Vodafone-C81A, FRITZ!Box 6820 AF, FRITZ!Box 7590 QU, DIRECT-o9-EPSON-ET-5150 Series
+15:25:24.097 STATE REAL                 ── === REAL provisioning: join 'IDEAL', then push 'UnserKleinesFunkloch' ===
+15:25:24.099 STATE WIFI                 ── requesting OPEN AP join: 'IDEAL'
+15:25:26.806 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, Vodafone-F526, Vodafone Homespot, Vodafone Hotspot, IDEAL, FRITZ!Box 7430 JB, FRITZ!Box 7510 SJ, Erdloch, FRITZ!Box 7530 EY, Jan Wlan, cafegrumpy_nomap, DIRECT-8D-HP ENVY 4520 series, Vodafone-C81A, FRITZ!Box 6820 AF, FRITZ!Box 7590 QU, DIRECT-o9-EPSON-ET-5150 Series
+15:25:26.814 ERROR WIFI                 onUnavailable -> AP join request rejected/failed
+15:25:26.815 ERROR REAL                 could not join device AP 'IDEAL' — is it in pairing mode?
+15:25:28.125 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, Vodafone Homespot, o2-WLAN76, Vodafone Hotspot, IDEAL, ExCryptYYBER, FRITZ!Box 7510 SJ, Erdloch, FRITZ!Box 7530 EY, Jan Wlan, MagentaWLAN-Z9S8, FRITZ!Box 6820 AF, FRITZ!Box 7590 QU, 0711
+15:25:29.348 STATE REAL                 ── === REAL provisioning: join 'IDEAL', then push 'UnserKleinesFunkloch' ===
+15:25:29.350 STATE WIFI                 ── requesting OPEN AP join: 'IDEAL'
+15:25:33.548 DEBUG WIFI                 onAvailable -> binding process to AP network
+15:25:33.553 DEBUG WIFI                 SSID list: IDEAL, Vodafone Homespot, o2-WLAN76, UnserKleinesFunkloch, Vodafone Hotspot, ExCryptYYBER, FRITZ!Box 7510 SJ, Erdloch, FRITZ!Box 7530 EY, Jan Wlan, MagentaWLAN-Z9S8, FRITZ!Box 6820 AF, FRITZ!Box 7590 QU, 0711
+15:25:33.591 STATE CONFIG               ── setupPurifier ssid='UnserKleinesFunkloch' moduleId='IDEAL_AP40_PRO'
+15:25:33.592 STATE DISCOVER             ── broadcasting HF-A11ASSISTHREAD to 255.255.255.255:48899
+15:25:33.602 TX    DISCOVERY            -> 255.255.255.255:48899 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:25:33.604 DEBUG DISCOVERY            HF-A11ASSISTHREAD sent, listening 1500ms
+15:25:33.612 RX    DISCOVERY            <- 10.10.100.150 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:25:33.614 WARN  DISCOVERY            ignored reply with 1 fields: HF-A11ASSISTHREAD
+15:25:35.148 DEBUG DISCOVERY            scan finished (timeout), 0 device(s)
+15:25:35.165 DEBUG CMD-MODE             no devices found
+15:25:35.315 DEBUG WIFI                 SSID list: IDEAL, Vodafone-590640, Vodafone-F526, FRITZ!Box 7530 EY, Jan Wlan, o2-WLAN76, UnserKleinesFunkloch, salve-hospes, Vodafone Hotspot, Vodafone Homespot, QueenofPrussia, FRITZ!Box 7590 QU, Erdloch
+15:25:37.168 STATE DISCOVER             ── broadcasting HF-A11ASSISTHREAD to 255.255.255.255:48899
+15:25:37.183 TX    DISCOVERY            -> 255.255.255.255:48899 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:25:37.185 DEBUG DISCOVERY            HF-A11ASSISTHREAD sent, listening 1500ms
+15:25:37.189 RX    DISCOVERY            <- 10.10.100.150 (17B)
+    0000  48 46 2d 41 31 31 41 53 53 49 53 54 48 52 45 41  |HF-A11ASSISTHREA|
+    0010  44                                               |D|
+15:25:37.190 WARN  DISCOVERY            ignored reply with 1 fields: HF-A11ASSISTHREAD
+15:25:37.223 RX    DISCOVERY            <- 10.10.100.254 (32B)
+    0000  31 30 2e 31 30 2e 31 30 30 2e 32 35 34 2c 32 38  |10.10.100.254,28|
+    0010  39 43 36 45 36 44 30 45 38 32 2c 49 44 45 41 4c  |9C6E6D0E82,IDEAL|
+15:25:37.226 DEBUG DISCOVERY            parsed -> ip=10.10.100.254 mac=289C6E6D0E82 name=IDEAL
+15:23:43.837 DEBUG DISCOVERY            scan finished (timeout), 1 device(s)
+15:25:39.002 TX    UDP                  -> 255.255.255.255:48899 (3B)
+    0000  2b 6f 6b                                         |+ok|
+15:25:23.053 RX    UDP                  <- 255.255.255.255 (3B)
+    0000  2b 6f 6b                                         |+ok|
+15:25:39.057 TX    UDP                  -> 10.10.100.254:48899 (7B)
+    0000  41 54 2b 56 45 52 0a                             |AT+VER.|
+15:25:39.075 RX    UDP                  <- 10.10.100.254 (34B)
+    0000  2b 6f 6b 3d 32 2e 30 2e 31 30 2c 38 20 28 32 30  |+ok=2.0.10,8 (20|
+    0010  31 38 2d 30 34 2d 32 37 20 31 34 34 32 29 0d 0a  |18-04-27 1442)..|
+    0020  0d 0a                                            |..|
+15:25:39.093 DEBUG CMD-MODE             command mode confirmed on 10.10.100.254 (AT+VER ok)
+15:25:41.111 TX    UDP                  -> 10.10.100.254:48899 (32B)
+    0000  41 54 2b 57 53 53 53 49 44 3d 55 6e 73 65 72 4b  |AT+WSSSID=UnserK|
+    0010  6c 65 69 6e 65 73 46 75 6e 6b 6c 6f 63 68 0d 0a  |leinesFunkloch..|
+15:25:41.292 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:25:41.318 DEBUG @@@@@                CR: +ok(true)
+15:23:43.837 TX    UDP                  -> 10.10.100.254:48899 (11B)
+    0000  41 54 2b 57 53 53 53 49 44 0d 0a                 |AT+WSSSID..|
+15:25:41.442 RX    UDP                  <- 10.10.100.254 (28B)
+    0000  2b 6f 6b 3d 55 6e 73 65 72 4b 6c 65 69 6e 65 73  |+ok=UnserKleines|
+    0010  46 75 6e 6b 6c 6f 63 68 0d 0a 0d 0a              |Funkloch....|
+15:25:41.459 DEBUG @@@@@                CR: +ok=UnserKleinesFunkloch(true)
+15:25:41.460 DEBUG IdealManager-setupAP AT+WSSSID:ok
+15:25:41.469 TX    UDP                  -> 10.10.100.254:48899 (14B)
+    0000  41 54 2b 44 49 53 50 53 3d 59 65 73 0d 0a        |AT+DISPS=Yes..|
+15:25:41.495 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:25:41.507 DEBUG @@@@@                CR: +ok(true)
+15:25:41.615 TX    UDP                  -> 10.10.100.254:48899 (10B)
+    0000  41 54 2b 44 49 53 50 53 0d 0a                    |AT+DISPS..|
+15:25:41.639 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 6f 6b 3d 59 65 73 0d 0a 0d 0a                 |+ok=Yes....|
+15:25:41.657 DEBUG @@@@@                CR: +ok=Yes(true)
+15:25:41.658 DEBUG IdealManager-setupAP AT+DISPS:ok
+15:25:41.661 TX    UDP                  -> 10.10.100.254:48899 (37B)
+    0000  41 54 2b 57 53 4b 45 59 3d 57 50 41 32 50 53 4b  |AT+WSKEY=WPA2PSK|
+    0010  2c 41 45 53 2c 6c 6f 72 64 67 69 76 65 74 68 77  |,AES,lordgivethw|
+    0020  69 66 69 0d 0a                                   |ifi..|
+15:25:41.853 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:25:41.880 DEBUG @@@@@                CR: +ok(true)
+15:23:43.837 TX    UDP                  -> 10.10.100.254:48899 (10B)
+    0000  41 54 2b 57 53 4b 45 59 0d 0a                    |AT+WSKEY..|
+15:25:42.009 RX    UDP                  <- 10.10.100.254 (34B)
+    0000  2b 6f 6b 3d 57 50 41 32 50 53 4b 2c 41 45 53 2c  |+ok=WPA2PSK,AES,|
+    0010  6c 6f 72 64 67 69 76 65 74 68 77 69 66 69 0d 0a  |lordgivethwifi..|
+    0020  0d 0a                                            |..|
+15:25:42.019 DEBUG @@@@@                CR: +ok=WPA2PSK,AES,lordgivethwifi(true)
+15:25:42.020 DEBUG IdealManager-setupAP AT+WSKEY:ok
+15:25:42.023 TX    UDP                  -> 10.10.100.254:48899 (14B)
+    0000  41 54 2b 57 4d 4f 44 45 3d 53 54 41 0d 0a        |AT+WMODE=STA..|
+15:25:42.246 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:25:42.282 DEBUG @@@@@                CR: +ok(true)
+15:25:42.392 TX    UDP                  -> 10.10.100.254:48899 (10B)
+    0000  41 54 2b 57 4d 4f 44 45 0d 0a                    |AT+WMODE..|
+15:25:42.413 RX    UDP                  <- 10.10.100.254 (11B)
+    0000  2b 6f 6b 3d 53 54 41 0d 0a 0d 0a                 |+ok=STA....|
+15:25:42.439 DEBUG @@@@@                CR: +ok=STA(true)
+15:25:42.440 DEBUG IdealManager-setupAP AT+WMODE:ok
+15:25:37.444 TX    UDP                  -> 10.10.100.254:48899 (25B)
+    0000  41 54 2b 57 52 4d 49 44 3d 49 44 45 41 4c 5f 41  |AT+WRMID=IDEAL_A|
+    0010  50 34 30 5f 50 52 4f 0d 0a                       |P40_PRO..|
+15:25:42.627 RX    UDP                  <- 10.10.100.254 (7B)
+    0000  2b 6f 6b 0d 0a 0d 0a                             |+ok....|
+15:25:42.658 DEBUG @@@@@                CR: +ok(true)
+15:25:42.766 TX    UDP                  -> 10.10.100.254:48899 (8B)
+    0000  41 54 2b 4d 49 44 0d 0a                          |AT+MID..|
+15:25:42.784 RX    UDP                  <- 10.10.100.254 (22B)
+    0000  2b 6f 6b 3d 49 44 45 41 4c 5f 41 50 34 30 5f 50  |+ok=IDEAL_AP40_P|
+    0010  52 4f 0d 0a 0d 0a                                |RO....|
+15:25:42.804 DEBUG @@@@@                CR: +ok=IDEAL_AP40_PRO(true)
+15:25:42.805 DEBUG IdealManager-setupAP AT+WRMID:ok
+15:25:42.805 DEBUG IdealManager-setupAP Setup commands OK, rebooting
+15:25:42.805 DEBUG IdealManager-setupAP IdealScanResult(ip=10.10.100.254, mac=289C6E6D0E82, name=IDEAL, timestamp=1781443537225)
+15:25:42.810 TX    UDP                  -> 10.10.100.254:48899 (8B)
+    0000  41 54 2b 53 52 53 54 0a                          |AT+SRST.|
+15:25:43.816 WARN  UDP                  command timeout for 'AT+SRST' -> 10.10.100.254
+15:25:43.868 TX    UDP                  -> 10.10.100.254:48899 (8B)
+    0000  41 54 2b 53 52 53 54 0a                          |AT+SRST.|
+15:25:44.871 WARN  UDP                  command timeout for 'AT+SRST' -> 10.10.100.254
+15:25:44.908 TX    UDP                  -> 10.10.100.254:48899 (8B)
+    0000  41 54 2b 53 52 53 54 0a                          |AT+SRST.|
+15:25:45.911 WARN  UDP                  command timeout for 'AT+SRST' -> 10.10.100.254
+15:25:45.940 STATE RESET                ── AT+SRST sent 3x; device should join 'UnserKleinesFunkloch'
+15:25:45.941 STATE REAL                 ── flow finished for 10.10.100.254
+15:25:45.943 DEBUG WIFI                 network callback unregistered
+15:25:45.944 STATE WIFI                 ── released AP, process unbound
+15:25:55.454 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, Vodafone-F526, FRITZ!Box 7530 EY, Vodafone Homespot, Jan Wlan, cafegrumpy_nomap, MagentaWLAN-Z9S8, Vodafone Hotspot, QueenofPrussia, FRITZ!Box 6820 AF, FRITZ!Box 7590 QU, FRITZ!Box 7510 SJ, Erdloch
+15:26:15.612 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, Vodafone-F526, Vodafone Homespot, Vodafone Hotspot, FRITZ!Box 7510 SJ, FRITZ!Box 6670 WY, Erdloch, FRITZ!Box 7530 EY, Jan Wlan, MagentaWLAN-Z9S8, ExCryptYYBER, FRITZ!Box 6820 AF, FRITZ!Box 7590 QU, DIRECT-o9-EPSON-ET-5150 Series
+15:28:31.817 DEBUG WIFI                 SSID list: UnserKleinesFunkloch, Vodafone-F526, Vodafone Homespot, A15 de Anna, Vodafone-550C, Ping Floyd, Vodafone Hotspot, FRITZ!Box 6490 Cable, MagentaWLAN-DWKH, LOVENET, FRITZ!Box 7510 SJ, FRITZ!Box 6670 WY, Erdloch, Wurstnetz, FRITZ!Box 7530 EY, Wann Urlaub?, MagentaWLAN-Z9S8, Griffendoor, ExCryptYYBER, o2-WLAN44, FRITZ!Box 7590 QU, MagentaWLAN-6XKV, Vodafone-590640, SalzundPfeffer, Flamingo, DIRECT-xK-BRAVIA, DIRECT-9u-FireTV_c10e, Jan Wlan, Vodafone-BCD6, AnPaBuSch, FRITZ!Box 6820 AF, ubernetwork, DIRECT-o9-EPSON-ET-5150 Series, I Come From A Lan Down Under

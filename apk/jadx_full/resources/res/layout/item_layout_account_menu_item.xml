@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:textSize="@dimen/text_size_17sp"
+    android:textColor="@color/colorListItem"
+    android:gravity="center_vertical"
+    android:id="@+id/text_account_link"
+    android:background="@drawable/style_text_view_with_bottom_border"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:text="@string/account"/>

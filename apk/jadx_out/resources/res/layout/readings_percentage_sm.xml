@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:tag="layout/readings_percentage_sm_0"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:textSize="48dp"
+        android:id="@+id/humidity_reading"
+        android:tag="binding_1"
+        android:paddingTop="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/ReadingsAppearanceSmall"/>
+    <TextView
+        android:textSize="26dp"
+        android:id="@+id/sign_percent_humidity"
+        android:paddingTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_percent"
+        android:layout_toEndOf="@+id/humidity_reading"
+        style="@style/ReadingsAppearanceSmall"/>
+</RelativeLayout>

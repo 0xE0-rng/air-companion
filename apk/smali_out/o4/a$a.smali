@@ -1,0 +1,22 @@
+.class public interface abstract Lo4/a$a;
+.super Ljava/lang/Object;
+.source "com.google.android.gms:play-services-base@@17.5.0"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lo4/a;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x609
+    name = "a"
+.end annotation
+
+
+# virtual methods
+.method public abstract a(Lo4/c;)V
+.end method
+
+.method public abstract b()I
+.end method

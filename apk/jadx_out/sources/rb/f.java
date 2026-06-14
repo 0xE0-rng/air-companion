@@ -1,0 +1,16 @@
+package rb;
+
+/* JADX INFO: compiled from: ClassKind.java */
+/* JADX INFO: loaded from: classes.dex */
+public enum f {
+    CLASS,
+    INTERFACE,
+    ENUM_CLASS,
+    ENUM_ENTRY,
+    ANNOTATION_CLASS,
+    OBJECT;
+
+    public boolean isSingleton() {
+        return this == OBJECT || this == ENUM_ENTRY;
+    }
+}

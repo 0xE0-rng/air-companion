@@ -1,0 +1,2 @@
+org.acra.startup.LimiterStartupProcessor
+org.acra.startup.UnapprovedStartupProcessor

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:theme="@style/ToolbarTheme"
+        android:id="@+id/activity_shop_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textAppearance="@android:style/TextAppearance"
+                android:textSize="@dimen/text_size_32sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/shop"
+                android:layout_marginHorizontal="@dimen/margin_16dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/shop_device_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:nestedScrollingEnabled="false"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
