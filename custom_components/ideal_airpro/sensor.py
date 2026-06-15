@@ -32,12 +32,13 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddE
 
 
 class IdealAirProPm25(IdealAirProEntity, SensorEntity):
-    """Estimated PM2.5 in µg/m³ from the onboard dust reading.
+    """Estimated PM2.5 in µg/m³ from the onboard optical dust reading.
 
     Uncalibrated: the device's true PM2.5 is computed in IDEAL's cloud and is
-    only available for a registered device. This is dust * 50/13250 (dust
-    full-scale from the air-quality formula, mapped to the 0-50 µg/m³ range),
-    so treat it as a relative trend, not an absolute measurement.
+    only available for a registered device. We approximate it by subtracting the
+    sensor's clean-air offset (~1450) and scaling the span up to D=13250 onto the
+    AQI range (see device.py). Treat it as a relative trend, not an absolute
+    measurement.
     """
 
     _attr_name = "PM2.5 (estimated)"

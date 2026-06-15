@@ -85,6 +85,20 @@ FILTER_STATUS = {
     "O": "OK", "R": "Reserve", "F": "Full", "E": "Error", "D": "Disabled",
 }
 
+# PM2.5 estimate from the raw optical dust reading (D token). This is an
+# uncalibrated approximation: the device's true PM2.5 is computed in IDEAL's
+# cloud and we have no local reference. Optical dust sensors (Sharp GP2Y10
+# family / clones) have a large clean-air offset, so a plain proportional scale
+# reads far too high at idle. Instead we subtract a baseline (the observed
+# no-dust idle, ~1450) and map the remaining span up to D=13250 (= 100% on the
+# firmware's contamination scale) onto the AQI range, anchored so full scale is
+# the top of the US AQI band (~500 µg/m³). DUST_BASELINE and DUST_FULLSCALE_PM25
+# are best-guess and tunable; a real reference (cloud PM2.5 or a co-located
+# meter) would replace them. See docs/06 for the cloud-calibration path.
+DUST_BASELINE = 1450
+DUST_MAX = 13250
+DUST_FULLSCALE_PM25 = 500
+
 
 def parse_status(raw: str) -> dict | None:
     """
@@ -159,7 +173,12 @@ def parse_status(raw: str) -> dict | None:
             max(min(voc / 732 * 100, 100), min(dust / 13250 * 100, 100))
         )
     if dust is not None:
-        status["pm25"] = round(dust * 50 / 13250, 1)
+        status["pm25"] = round(
+            max(0, dust - DUST_BASELINE)
+            * DUST_FULLSCALE_PM25
+            / (DUST_MAX - DUST_BASELINE),
+            1,
+        )
 
     return status
 
