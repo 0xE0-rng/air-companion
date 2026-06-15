@@ -42,15 +42,15 @@ class IdealAirProLed(IdealAirProEntity, NumberEntity):
 class IdealAirProTimer(IdealAirProEntity, NumberEntity):
     """Delayed power timer in hours.
 
-    Setting a value schedules a power toggle: C1-C9 = 1-9 h, C0 = 10 h. The
-    device reports the remaining time as a countdown in seconds (the C token;
-    0 = no timer running), which we surface rounded to whole hours. The firmware
-    has no command to cancel a running timer, so the minimum settable value is 1.
+    Setting 1-9 schedules a power toggle in that many hours (C1-C9); 10 = C0.
+    Setting 0 cancels a running timer (the CR verb). The device reports the
+    remaining time as a countdown in seconds (the C token; 0 = no timer), which
+    we surface rounded to whole hours.
     """
 
     _attr_name = "Power-on timer"
     _attr_icon = "mdi:timer-outline"
-    _attr_native_min_value = 1
+    _attr_native_min_value = 0
     _attr_native_max_value = 10
     _attr_native_step = 1
     _attr_native_unit_of_measurement = UnitOfTime.HOURS
@@ -65,9 +65,14 @@ class IdealAirProTimer(IdealAirProEntity, NumberEntity):
             seconds = int(self.coordinator.data.get("timer", 0))
         except (TypeError, ValueError):
             return None
-        return round(seconds / 3600) if seconds > 0 else None
+        return round(seconds / 3600) if seconds > 0 else 0
 
     async def async_set_native_value(self, value: float) -> None:
         hours = int(value)
-        verb = "C0" if hours == 10 else f"C{hours}"
+        if hours <= 0:
+            verb = "CR"  # cancel a running timer
+        elif hours == 10:
+            verb = "C0"
+        else:
+            verb = f"C{hours}"
         await self.coordinator.async_send_command(verb)

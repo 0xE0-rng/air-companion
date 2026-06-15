@@ -11,7 +11,6 @@ PLATFORMS: list[Platform] = [
     Platform.SENSOR,
     Platform.NUMBER,
     Platform.SWITCH,
-    Platform.BUTTON,
 ]
 
 UPDATE_INTERVAL = 10  # seconds
@@ -45,12 +44,10 @@ MODE_TO_LABEL: dict[str, str] = {
     "turbo": "Turbo",
 }
 
-# Momentary buttons -> verb. Filter reset (CR) is the only momentary control the
-# device actually supports. (There is no "identify" command: BD is the device's
-# ACK reply token, not a control verb.)
-BUTTON_VERBS: dict[str, str] = {
-    "filter_reset": "CR",
-}
+# The device exposes no momentary commands worth a button: there is no
+# filter-reset command (CR, despite the name, cancels the running timer — handled
+# by the timer number), and "identify" (BD) is the device's ACK reply token, not
+# a control verb. So there is no button platform.
 
 # The only on/off control with a real verb + status read-back is child lock,
 # handled specially in switch.py (reads the K token, toggles via KY). The device
