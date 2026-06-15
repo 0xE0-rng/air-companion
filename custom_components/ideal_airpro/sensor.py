@@ -20,6 +20,7 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddE
     entities: list[SensorEntity] = [
         IdealAirProPm25(coordinator),
         IdealAirProContamination(coordinator),
+        IdealAirProVoc(coordinator),
         IdealAirProStageSensor(coordinator),
         IdealAirProFilterStatus(coordinator),
         IdealAirProModelSensor(coordinator),
@@ -71,6 +72,22 @@ class IdealAirProContamination(IdealAirProEntity, SensorEntity):
     @property
     def native_value(self) -> int | None:
         return self.coordinator.data.get("contamination")
+
+
+class IdealAirProVoc(IdealAirProEntity, SensorEntity):
+    """VOC level above the sensor's live reference (V - R), an uncalibrated index."""
+
+    _attr_name = "VOC"
+    _attr_icon = "mdi:chemical-weapon"
+    _attr_state_class = SensorStateClass.MEASUREMENT
+
+    def __init__(self, coordinator) -> None:
+        super().__init__(coordinator)
+        self._attr_unique_id = f"{coordinator.ip}_voc"
+
+    @property
+    def native_value(self) -> int | None:
+        return self.coordinator.data.get("voc")
 
 
 class IdealAirProStageSensor(IdealAirProEntity, SensorEntity):
@@ -147,7 +164,13 @@ class IdealAirProWifiSignal(IdealAirProEntity, SensorEntity):
 
     @property
     def extra_state_attributes(self) -> dict:
-        return {"status": self.coordinator.data.get("wifi_status")}
+        data = self.coordinator.data
+        return {
+            "status": data.get("wifi_status"),
+            "ssid": data.get("wifi_ssid"),
+            "bssid": data.get("wifi_bssid"),
+            "module_firmware": data.get("module_firmware"),
+        }
 
 
 class IdealAirProTokenSensor(IdealAirProEntity, SensorEntity):

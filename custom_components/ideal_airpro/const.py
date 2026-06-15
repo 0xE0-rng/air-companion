@@ -59,7 +59,6 @@ MODE_TO_LABEL: dict[str, str] = {
 # D/V used for derived PM2.5/Contamination; C=timer (number); K=child lock
 # (switch); A/M=mode (fan); H/X=device metadata.
 TOKEN_SENSORS: dict[str, tuple[str, str | None, str | None]] = {
-    "V": ("VOC", None, None),
     "Y": ("Ambient light", "lx", "illuminance"),
     "Z": ("Filter run hours", "h", "duration"),
     "U": ("Fan RPM", "rpm", None),

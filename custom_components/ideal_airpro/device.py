@@ -183,6 +183,12 @@ def parse_status(raw: str) -> dict | None:
             max(0, dust - DUST_BASELINE) / (DUST_MAX - DUST_BASELINE) * 100, 100
         )
         status["contamination"] = round(max(voc_pct, dust_pct))
+
+    # VOC level as the sensor reading above its live reference (R token). This is
+    # an uncalibrated relative index, not µg/m³ — the raw V sits ~baseline in
+    # clean air, so V - R is the meaningful "VOC present" signal.
+    if voc is not None:
+        status["voc"] = max(0, voc - voc_ref) if voc_ref is not None else voc
     if dust is not None:
         status["pm25"] = round(
             max(0, dust - DUST_BASELINE)
@@ -205,14 +211,16 @@ def send_command(ip: str, verb: str) -> None:
 
 
 _WSLQ_RE = re.compile(r"\+ok=([^,]+),\s*(\d+)\s*%")
+_WSLK_RE = re.compile(r"\+ok=(.+)\(([0-9A-Fa-f:]+)\)")
 
 
 def get_signal(ip: str, timeout: float = 2.0) -> dict | None:
-    """Read the Wi-Fi module's link quality via its UDP 48899 AT interface.
+    """Read Wi-Fi diagnostics from the module's UDP 48899 AT interface.
 
-    This is independent of the TCP control socket: discover, enter command mode
-    (+ok), query AT+WSLQ (e.g. "+ok=Normal, 52%"), then exit. Returns
-    {'wifi_status': str, 'wifi_signal': int(percent)} or None.
+    Independent of the TCP control socket: discover, enter command mode (+ok),
+    query AT+WSLQ (link quality, e.g. "+ok=Normal, 52%"), AT+WSLK (the connected
+    AP as "SSID(BSSID)") and AT+VER (module firmware), then exit. Returns a dict
+    with wifi_signal/status/ssid/bssid/module_firmware, or None if WSLQ failed.
     """
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.settimeout(timeout)
@@ -227,12 +235,24 @@ def get_signal(ip: str, timeout: float = 2.0) -> dict | None:
     try:
         _at(DISCOVERY_MAGIC)
         _at(b"+ok")  # enter command mode
-        reply = _at(b"AT+WSLQ\r\n")
+        wslq = _at(b"AT+WSLQ\r\n")
+        wslk = _at(b"AT+WSLK\r\n")
+        ver = _at(b"AT+VER\r\n")
         _at(b"AT+ENTM\r\n")  # back to transparent mode
     finally:
         sock.close()
 
-    match = _WSLQ_RE.search(reply)
-    if not match:
+    quality = _WSLQ_RE.search(wslq)
+    if not quality:
         return None
-    return {"wifi_status": match.group(1).strip(), "wifi_signal": int(match.group(2))}
+    info = {
+        "wifi_status": quality.group(1).strip(),
+        "wifi_signal": int(quality.group(2)),
+    }
+    link = _WSLK_RE.search(wslk)
+    if link:
+        info["wifi_ssid"] = link.group(1).strip()
+        info["wifi_bssid"] = link.group(2)
+    if ver.startswith("+ok="):
+        info["module_firmware"] = ver[4:].strip()
+    return info
