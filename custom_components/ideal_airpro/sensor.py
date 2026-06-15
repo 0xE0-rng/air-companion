@@ -75,10 +75,12 @@ class IdealAirProContamination(IdealAirProEntity, SensorEntity):
 
 
 class IdealAirProVoc(IdealAirProEntity, SensorEntity):
-    """VOC level above the sensor's live reference (V - R), an uncalibrated index."""
+    """VOC level as a 0-100 index (the V-R reading scaled to the device's VOC
+    full-scale). A relative trend, not a standard AQI and not ppb/µg/m³."""
 
     _attr_name = "VOC"
     _attr_icon = "mdi:chemical-weapon"
+    _attr_native_unit_of_measurement = "%"
     _attr_state_class = SensorStateClass.MEASUREMENT
 
     def __init__(self, coordinator) -> None:

@@ -100,6 +100,9 @@ DUST_BASELINE = 1450
 DUST_MAX = 13250
 DUST_FULLSCALE_PM25 = 500
 
+# The firmware's VOC full-scale (V/732 = 100% in its contamination formula).
+VOC_MAX = 732
+
 
 def parse_status(raw: str) -> dict | None:
     """
@@ -165,37 +168,39 @@ def parse_status(raw: str) -> dict | None:
     if timer is not None:
         status["timer"] = timer
 
-    # Derived air quality. Contamination matches the app's formula
-    # max(voc/732, dust/13250) * 100, clamped 0-100. PM2.5 is the dust reading
-    # scaled to the cloud's 0-50 µg/m³ range (dust full-scale ~13250).
     dust, voc, voc_ref = _int("D"), _int("V"), _int("R")
-    if dust is not None and voc is not None:
-        # Local offline estimate of the air-quality index (0-100), the worse of
-        # the VOC and dust contributions. The app's *displayed* contamination is
-        # the calibrated cloud value, not this. Both raw sensors sit well above
-        # zero in clean air, so we baseline-subtract: VOC against its live
-        # reference (the R token) and dust against its idle floor. Using the raw
-        # readings (as the firmware's own formula does, voc/732 & dust/13250)
-        # massively overstates it — e.g. a clean-air V≈440 would read ~60%.
-        voc_excess = max(0, voc - voc_ref) if voc_ref is not None else voc
-        voc_pct = min(voc_excess / 732 * 100, 100)
-        dust_pct = min(
-            max(0, dust - DUST_BASELINE) / (DUST_MAX - DUST_BASELINE) * 100, 100
-        )
-        status["contamination"] = round(max(voc_pct, dust_pct))
 
-    # VOC level as the sensor reading above its live reference (R token). This is
-    # an uncalibrated relative index, not µg/m³ — the raw V sits ~baseline in
-    # clean air, so V - R is the meaningful "VOC present" signal.
+    # VOC as a 0-100 index: the gas-sensor reading (V) above its live reference
+    # (R), scaled to the firmware's VOC full-scale of 732. This is the device's
+    # own relative VOC scale -- NOT a standard air-quality index and NOT ppb. Raw
+    # V sits at ~baseline (≈R) in clean air, so this reads ~0 when clean and rises
+    # as VOCs appear.
+    voc_pct = None
     if voc is not None:
-        status["voc"] = max(0, voc - voc_ref) if voc_ref is not None else voc
+        ref = voc_ref if voc_ref is not None else 0
+        span = VOC_MAX - ref
+        if span > 0:
+            voc_pct = max(0.0, min(100.0, (voc - ref) / span * 100))
+            status["voc"] = round(voc_pct)
+
+    # Dust as a 0-100 index above the optical sensor's clean-air idle floor, plus
+    # the derived (uncalibrated) PM2.5 estimate in µg/m³ -- see the constants above.
+    dust_pct = None
     if dust is not None:
+        dust_pct = max(
+            0.0, min(100.0, (dust - DUST_BASELINE) / (DUST_MAX - DUST_BASELINE) * 100)
+        )
         status["pm25"] = round(
             max(0, dust - DUST_BASELINE)
             * DUST_FULLSCALE_PM25
             / (DUST_MAX - DUST_BASELINE),
             1,
         )
+
+    # Contamination = the worse of the two (the app's max-of formula), baseline-
+    # subtracted so clean air reads low instead of ~60%.
+    if voc_pct is not None and dust_pct is not None:
+        status["contamination"] = round(max(voc_pct, dust_pct))
 
     return status
 
