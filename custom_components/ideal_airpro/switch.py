@@ -5,7 +5,6 @@ from homeassistant.components.switch import SwitchEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import device
 from .const import SWITCHES
 from .entity import IdealAirProEntity
 
@@ -36,10 +35,7 @@ class IdealAirProChildLock(IdealAirProEntity, SwitchEntity):
         return self.coordinator.data.get("key_lock") == "A"
 
     async def _toggle(self) -> None:
-        await self.coordinator.hass.async_add_executor_job(
-            device.send_command, self.coordinator.ip, "KY"
-        )
-        await self.coordinator.async_request_refresh()
+        await self.coordinator.async_send_command("KY")
 
     async def async_turn_on(self, **kwargs) -> None:
         if not self.is_on:
@@ -68,9 +64,7 @@ class IdealAirProToggle(IdealAirProEntity, SwitchEntity):
         return self._is_on
 
     async def _send(self, verb: str) -> None:
-        await self.coordinator.hass.async_add_executor_job(
-            device.send_command, self.coordinator.ip, verb
-        )
+        await self.coordinator.async_send_command(verb)
 
     async def async_turn_on(self, **kwargs) -> None:
         await self._send(self._on_verb)

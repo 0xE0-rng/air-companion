@@ -5,7 +5,6 @@ from homeassistant.components.fan import FanEntity, FanEntityFeature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import device
 from .const import MODE_VERBS
 from .entity import IdealAirProEntity
 
@@ -56,7 +55,4 @@ class IdealAirProFan(IdealAirProEntity, FanEntity):
             await self._send(verb)
 
     async def _send(self, verb: str) -> None:
-        await self.coordinator.hass.async_add_executor_job(
-            device.send_command, self.coordinator.ip, verb
-        )
-        await self.coordinator.async_request_refresh()
+        await self.coordinator.async_send_command(verb)

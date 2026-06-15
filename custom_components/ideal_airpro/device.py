@@ -80,6 +80,11 @@ MODELS = {
     "80": "AP80 Pro", "14": "AP140 Pro", "41": "AP140 Pro",
 }
 
+# Filter status (F token) -> meaning.
+FILTER_STATUS = {
+    "O": "OK", "R": "Reserve", "F": "Full", "E": "Error", "D": "Disabled",
+}
+
 
 def parse_status(raw: str) -> dict | None:
     """
@@ -113,6 +118,8 @@ def parse_status(raw: str) -> dict | None:
         status["stage"] = fields["S"]
     if "K" in fields:
         status["key_lock"] = fields["K"]
+    if "F" in fields:
+        status["filter_status"] = FILTER_STATUS.get(fields["F"], fields["F"])
 
     # Mode / power (verified live): an 'A' token means auto-on, except 'A-'
     # which is off; an 'M' token means manual, its value is the stage char.

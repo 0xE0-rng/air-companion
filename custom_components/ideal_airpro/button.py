@@ -5,7 +5,6 @@ from homeassistant.components.button import ButtonEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import device
 from .const import BUTTON_VERBS
 from .entity import IdealAirProEntity
 
@@ -28,7 +27,4 @@ class IdealAirProButton(IdealAirProEntity, ButtonEntity):
         self._attr_unique_id = f"{coordinator.ip}_{key}"
 
     async def async_press(self) -> None:
-        await self.coordinator.hass.async_add_executor_job(
-            device.send_command, self.coordinator.ip, self._verb
-        )
-        await self.coordinator.async_request_refresh()
+        await self.coordinator.async_send_command(self._verb)

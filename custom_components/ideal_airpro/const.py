@@ -7,6 +7,7 @@ DOMAIN = "ideal_airpro"
 
 PLATFORMS: list[Platform] = [
     Platform.FAN,
+    Platform.SELECT,
     Platform.SENSOR,
     Platform.NUMBER,
     Platform.SWITCH,
@@ -23,6 +24,25 @@ MODE_VERBS: dict[str, str] = {
     "stage2": "S2",
     "stage3": "S3",
     "turbo": "ST",
+}
+
+# Mode/stage select with the app's display names: label -> verb.
+MODE_SELECT: dict[str, str] = {
+    "Auto": "SA",
+    "Quiet": "SQ",
+    "Stage 1": "S1",
+    "Stage 2": "S2",
+    "Stage 3": "S3",
+    "Turbo": "ST",
+}
+# Parsed mode value -> select label (for current state).
+MODE_TO_LABEL: dict[str, str] = {
+    "auto": "Auto",
+    "quiet": "Quiet",
+    "stage1": "Stage 1",
+    "stage2": "Stage 2",
+    "stage3": "Stage 3",
+    "turbo": "Turbo",
 }
 
 # Momentary buttons -> verb. (Child lock / night / display are switches now.)
@@ -44,22 +64,21 @@ SWITCHES: dict[str, tuple[str, str, str]] = {
 # (switch); A/M=mode (fan); H/X=device metadata.
 TOKEN_SENSORS: dict[str, tuple[str, str | None, str | None]] = {
     "V": ("VOC", None, None),
-    "Y": ("Ambient light", None, None),
+    "Y": ("Ambient light", "lx", "illuminance"),
     "Z": ("Filter run hours", "h", "duration"),
     "U": ("Fan RPM", "rpm", None),
     "D": ("Dust (raw)", None, None),
     "R": ("VOC reference", None, None),
-    "I": ("Fan A2", None, None),
-    "J": ("Fan A3", None, None),
-    "P": ("Filter wasting", None, None),
+    "I": ("Fan A2 threshold", None, None),
+    "J": ("Fan A3 threshold", None, None),
+    "P": ("Filter wear", None, None),
     "W": ("Valency", None, None),
-    "N": ("Stage 3-2 time", None, None),
-    "O": ("Stage 2-1 time", None, None),
-    "F": ("Filter status (raw)", None, None),
+    "N": ("Stage 3->2 delay", "s", None),
+    "O": ("Stage 2->1 delay", "s", None),
 }
 
 # Token sensors created disabled by default (opt-in diagnostics).
-DISABLED_TOKENS: set[str] = {"D", "R", "I", "J", "P", "W", "N", "O", "F"}
+DISABLED_TOKENS: set[str] = {"D", "R", "I", "J", "P", "W", "N", "O"}
 
 # Stage (S token) value -> human label.
 STAGE_LABELS: dict[str, str] = {

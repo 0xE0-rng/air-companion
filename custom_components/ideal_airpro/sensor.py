@@ -21,6 +21,7 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddE
         IdealAirProPm25(coordinator),
         IdealAirProContamination(coordinator),
         IdealAirProStageSensor(coordinator),
+        IdealAirProFilterStatus(coordinator),
         IdealAirProModelSensor(coordinator),
     ]
     entities += [
@@ -91,6 +92,23 @@ class IdealAirProStageSensor(IdealAirProEntity, SensorEntity):
     def extra_state_attributes(self) -> dict:
         data = self.coordinator.data or {}
         return {k: v for k, v in data.items() if k != "tokens"}
+
+
+class IdealAirProFilterStatus(IdealAirProEntity, SensorEntity):
+    """Filter status: OK / Reserve / Full / Error / Disabled."""
+
+    _attr_name = "Filter status"
+    _attr_icon = "mdi:air-filter"
+    _attr_device_class = "enum"
+    _attr_options = ["OK", "Reserve", "Full", "Error", "Disabled"]
+
+    def __init__(self, coordinator) -> None:
+        super().__init__(coordinator)
+        self._attr_unique_id = f"{coordinator.ip}_filter_status"
+
+    @property
+    def native_value(self) -> str | None:
+        return self.coordinator.data.get("filter_status")
 
 
 class IdealAirProModelSensor(IdealAirProEntity, SensorEntity):

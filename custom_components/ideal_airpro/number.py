@@ -5,7 +5,6 @@ from homeassistant.components.number import NumberEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import device
 from .entity import IdealAirProEntity
 
 
@@ -45,7 +44,4 @@ class IdealAirProNumber(IdealAirProEntity, NumberEntity):
 
     async def async_set_native_value(self, value: float) -> None:
         verb = f"{self._verb_prefix}{int(value)}"
-        await self.coordinator.hass.async_add_executor_job(
-            device.send_command, self.coordinator.ip, verb
-        )
-        await self.coordinator.async_request_refresh()
+        await self.coordinator.async_send_command(verb)
