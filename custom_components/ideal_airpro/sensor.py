@@ -23,6 +23,7 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddE
         IdealAirProStageSensor(coordinator),
         IdealAirProFilterStatus(coordinator),
         IdealAirProModelSensor(coordinator),
+        IdealAirProWifiSignal(coordinator),
     ]
     entities += [
         IdealAirProTokenSensor(coordinator, token, name, unit, device_class)
@@ -125,6 +126,28 @@ class IdealAirProModelSensor(IdealAirProEntity, SensorEntity):
     @property
     def native_value(self) -> str | None:
         return self.coordinator.data.get("model")
+
+
+class IdealAirProWifiSignal(IdealAirProEntity, SensorEntity):
+    """Wi-Fi link quality (%) from the module's AT+WSLQ, a diagnostic."""
+
+    _attr_name = "Wi-Fi signal"
+    _attr_native_unit_of_measurement = "%"
+    _attr_icon = "mdi:wifi"
+    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+
+    def __init__(self, coordinator) -> None:
+        super().__init__(coordinator)
+        self._attr_unique_id = f"{coordinator.ip}_wifi_signal"
+
+    @property
+    def native_value(self) -> int | None:
+        return self.coordinator.data.get("wifi_signal")
+
+    @property
+    def extra_state_attributes(self) -> dict:
+        return {"status": self.coordinator.data.get("wifi_status")}
 
 
 class IdealAirProTokenSensor(IdealAirProEntity, SensorEntity):

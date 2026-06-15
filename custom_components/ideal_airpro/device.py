@@ -15,6 +15,7 @@ Everything here is local to your LAN — no cloud is involved.
 from __future__ import annotations
 
 import json
+import re
 import socket
 from dataclasses import dataclass
 
@@ -167,11 +168,21 @@ def parse_status(raw: str) -> dict | None:
     # Derived air quality. Contamination matches the app's formula
     # max(voc/732, dust/13250) * 100, clamped 0-100. PM2.5 is the dust reading
     # scaled to the cloud's 0-50 µg/m³ range (dust full-scale ~13250).
-    dust, voc = _int("D"), _int("V")
+    dust, voc, voc_ref = _int("D"), _int("V"), _int("R")
     if dust is not None and voc is not None:
-        status["contamination"] = round(
-            max(min(voc / 732 * 100, 100), min(dust / 13250 * 100, 100))
+        # Local offline estimate of the air-quality index (0-100), the worse of
+        # the VOC and dust contributions. The app's *displayed* contamination is
+        # the calibrated cloud value, not this. Both raw sensors sit well above
+        # zero in clean air, so we baseline-subtract: VOC against its live
+        # reference (the R token) and dust against its idle floor. Using the raw
+        # readings (as the firmware's own formula does, voc/732 & dust/13250)
+        # massively overstates it — e.g. a clean-air V≈440 would read ~60%.
+        voc_excess = max(0, voc - voc_ref) if voc_ref is not None else voc
+        voc_pct = min(voc_excess / 732 * 100, 100)
+        dust_pct = min(
+            max(0, dust - DUST_BASELINE) / (DUST_MAX - DUST_BASELINE) * 100, 100
         )
+        status["contamination"] = round(max(voc_pct, dust_pct))
     if dust is not None:
         status["pm25"] = round(
             max(0, dust - DUST_BASELINE)
@@ -191,3 +202,37 @@ def get_status(ip: str) -> dict | None:
 def send_command(ip: str, verb: str) -> None:
     """Send a single control verb (e.g. ON, SA, ST, KY, CR)."""
     _tcp_send(ip, verb, read=False)
+
+
+_WSLQ_RE = re.compile(r"\+ok=([^,]+),\s*(\d+)\s*%")
+
+
+def get_signal(ip: str, timeout: float = 2.0) -> dict | None:
+    """Read the Wi-Fi module's link quality via its UDP 48899 AT interface.
+
+    This is independent of the TCP control socket: discover, enter command mode
+    (+ok), query AT+WSLQ (e.g. "+ok=Normal, 52%"), then exit. Returns
+    {'wifi_status': str, 'wifi_signal': int(percent)} or None.
+    """
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.settimeout(timeout)
+
+    def _at(cmd: bytes) -> str:
+        sock.sendto(cmd, (ip, UDP_PORT))
+        try:
+            return sock.recvfrom(512)[0].decode(ENCODING, "ignore").strip()
+        except socket.timeout:
+            return ""
+
+    try:
+        _at(DISCOVERY_MAGIC)
+        _at(b"+ok")  # enter command mode
+        reply = _at(b"AT+WSLQ\r\n")
+        _at(b"AT+ENTM\r\n")  # back to transparent mode
+    finally:
+        sock.close()
+
+    match = _WSLQ_RE.search(reply)
+    if not match:
+        return None
+    return {"wifi_status": match.group(1).strip(), "wifi_signal": int(match.group(2))}
