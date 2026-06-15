@@ -45,18 +45,17 @@ MODE_TO_LABEL: dict[str, str] = {
     "turbo": "Turbo",
 }
 
-# Momentary buttons -> verb. (Child lock / night / display are switches now.)
+# Momentary buttons -> verb. Filter reset (CR) is the only momentary control the
+# device actually supports. (There is no "identify" command: BD is the device's
+# ACK reply token, not a control verb.)
 BUTTON_VERBS: dict[str, str] = {
-    "identify": "BD",
     "filter_reset": "CR",
 }
 
-# Toggle switches: name + on/off verbs. Night/Display are write-only (assumed
-# state); child lock is handled specially (reads the K token, toggles via KY).
-SWITCHES: dict[str, tuple[str, str, str]] = {
-    "night": ("Night mode", "NE", "ND"),
-    "display": ("Display", "DE", "DD"),
-}
+# The only on/off control with a real verb + status read-back is child lock,
+# handled specially in switch.py (reads the K token, toggles via KY). The device
+# firmware has no night-mode or display-toggle command (the previous NE/ND and
+# DE/DD verbs were no-ops); display brightness is the LED number (L0 = off).
 
 # Raw status token -> (friendly name, unit, device_class). Tokens handled
 # elsewhere are NOT listed here: S=stage, L=led, T=model (dedicated entities);

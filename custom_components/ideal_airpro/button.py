@@ -18,7 +18,7 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddE
 
 
 class IdealAirProButton(IdealAirProEntity, ButtonEntity):
-    """A momentary control verb (e.g. KY, BD, CR)."""
+    """A momentary control verb (currently just CR, the filter reset)."""
 
     def __init__(self, coordinator, key: str, verb: str) -> None:
         super().__init__(coordinator)

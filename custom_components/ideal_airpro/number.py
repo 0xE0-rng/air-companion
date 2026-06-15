@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from homeassistant.components.number import NumberEntity
+from homeassistant.const import UnitOfTime
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -9,39 +10,64 @@ from .entity import IdealAirProEntity
 
 
 async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddEntitiesCallback) -> None:
-    """Set up the LED brightness and timer numbers."""
+    """Set up the LED brightness and power-on timer numbers."""
     coordinator = entry.runtime_data
-    async_add_entities(
-        [
-            IdealAirProNumber(coordinator, "led", "LED brightness", "L", read_key="led"),
-            IdealAirProNumber(coordinator, "timer", "Timer", "C", read_key="timer"),
-        ]
-    )
+    async_add_entities([IdealAirProLed(coordinator), IdealAirProTimer(coordinator)])
 
 
-class IdealAirProNumber(IdealAirProEntity, NumberEntity):
-    """A 0-9 control mapped to an L<n> / C<n> verb."""
+class IdealAirProLed(IdealAirProEntity, NumberEntity):
+    """LED / display brightness 0-9, mapped to the L<n> verb (L0 = display off)."""
 
+    _attr_name = "LED brightness"
+    _attr_icon = "mdi:brightness-6"
     _attr_native_min_value = 0
     _attr_native_max_value = 9
     _attr_native_step = 1
 
-    def __init__(self, coordinator, key: str, name: str, verb_prefix: str, read_key: str | None) -> None:
+    def __init__(self, coordinator) -> None:
         super().__init__(coordinator)
-        self._verb_prefix = verb_prefix
-        self._read_key = read_key
-        self._attr_name = name
-        self._attr_unique_id = f"{coordinator.ip}_{key}"
+        self._attr_unique_id = f"{coordinator.ip}_led"
 
     @property
     def native_value(self) -> float | None:
-        if self._read_key is None:
-            return None
         try:
-            return int(self.coordinator.data.get(self._read_key, 0))
+            return int(self.coordinator.data.get("led"))
         except (TypeError, ValueError):
             return None
 
     async def async_set_native_value(self, value: float) -> None:
-        verb = f"{self._verb_prefix}{int(value)}"
+        await self.coordinator.async_send_command(f"L{int(value)}")
+
+
+class IdealAirProTimer(IdealAirProEntity, NumberEntity):
+    """Delayed power timer in hours.
+
+    Setting a value schedules a power toggle: C1-C9 = 1-9 h, C0 = 10 h. The
+    device reports the remaining time as a countdown in seconds (the C token;
+    0 = no timer running), which we surface rounded to whole hours. The firmware
+    has no command to cancel a running timer, so the minimum settable value is 1.
+    """
+
+    _attr_name = "Power-on timer"
+    _attr_icon = "mdi:timer-outline"
+    _attr_native_min_value = 1
+    _attr_native_max_value = 10
+    _attr_native_step = 1
+    _attr_native_unit_of_measurement = UnitOfTime.HOURS
+
+    def __init__(self, coordinator) -> None:
+        super().__init__(coordinator)
+        self._attr_unique_id = f"{coordinator.ip}_timer"
+
+    @property
+    def native_value(self) -> float | None:
+        try:
+            seconds = int(self.coordinator.data.get("timer", 0))
+        except (TypeError, ValueError):
+            return None
+        return round(seconds / 3600) if seconds > 0 else None
+
+    async def async_set_native_value(self, value: float) -> None:
+        hours = int(value)
+        verb = "C0" if hours == 10 else f"C{hours}"
         await self.coordinator.async_send_command(verb)
