@@ -15,10 +15,27 @@ below, but are not yet exposed by this integration.)
 
 ## Features
 
-- **Fan control** — power, and preset modes (Auto, Quiet, Stage 1–3, Turbo).
-- **Settings** — LED brightness and timer.
-- **Diagnostics** — filter life and the raw status tokens from the device.
-- **Quick actions** — Child Lock, Identify, Filter Reset, Display.
+- **Fan control** — power and preset modes (Auto, Quiet, Stage 1–3, Turbo), plus a Mode selector.
+- **Settings** — LED brightness, a power-on timer (with cancel), and child lock.
+- **Air quality** — estimated PM2.5, a VOC index and a contamination index (see the disclaimer below).
+- **Diagnostics** — filter status & life, fan RPM, ambient light, Wi-Fi signal, and the raw status tokens.
+
+## Air-quality readings — please read
+
+The **PM2.5**, **VOC** and **Contamination** values are derived locally from the
+purifier's built-in sensors and are **uncalibrated estimates**, not laboratory-grade
+measurements:
+
+- **PM2.5** is approximated from the optical dust sensor and is **not** an accurate
+  µg/m³ figure. Treat it as a *relative trend* — it tracks air quality up and down,
+  but the absolute value can be off (especially at higher concentrations). The
+  manufacturer's own app shows a cloud-calibrated value instead.
+- **VOC** and **Contamination** are **relative 0–100 indices** from the onboard
+  sensors — **not** a standard Air Quality Index and **not** calibrated units
+  (ppb / µg/m³).
+
+Use them for trends and automations (e.g. "VOC rose → boost the fan"), not as a
+substitute for a calibrated air-quality monitor.
 
 ## Before you start: join the purifier to Wi-Fi
 
