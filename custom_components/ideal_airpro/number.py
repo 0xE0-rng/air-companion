@@ -16,9 +16,15 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddE
 
 
 class IdealAirProLed(IdealAirProEntity, NumberEntity):
-    """LED / display brightness 0-9, mapped to the L<n> verb (L0 = display off)."""
+    """Display/screen brightness 0-9.
 
-    _attr_name = "LED brightness"
+    On the AP40 the screen brightness lives in the H token's D<display>N<night>
+    field, NOT the standalone L register (which the firmware accepts but ignores).
+    Mirroring the app: write N{n} in quiet mode and D{n} otherwise, and read the
+    matching sub-field back.
+    """
+
+    _attr_name = "Display brightness"
     _attr_icon = "mdi:brightness-6"
     _attr_native_min_value = 0
     _attr_native_max_value = 9
@@ -30,13 +36,16 @@ class IdealAirProLed(IdealAirProEntity, NumberEntity):
 
     @property
     def native_value(self) -> float | None:
+        data = self.coordinator.data
+        key = "night" if data.get("mode") == "quiet" else "display"
         try:
-            return int(self.coordinator.data.get("led"))
+            return int(data.get(key))
         except (TypeError, ValueError):
             return None
 
     async def async_set_native_value(self, value: float) -> None:
-        await self.coordinator.async_send_command(f"L{int(value)}")
+        prefix = "N" if self.coordinator.data.get("mode") == "quiet" else "D"
+        await self.coordinator.async_send_command(f"{prefix}{int(value)}")
 
 
 class IdealAirProTimer(IdealAirProEntity, NumberEntity):

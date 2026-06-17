@@ -86,6 +86,14 @@ FILTER_STATUS = {
     "O": "OK", "R": "Reserve", "F": "Full", "E": "Error", "D": "Disabled",
 }
 
+# Air-quality indicator (the S token's value) -> the device's LED-ring colour.
+# This is the app's air-quality enum (oa.l): 0=off, 1=green, 2=yellow, 3=red,
+# R=reference/calibrating. NOTE: the S token is air quality, NOT the fan stage;
+# the running stage/mode lives in the A/M token (parsed into status["mode"]).
+AIR_QUALITY = {
+    "0": "Off", "1": "Green", "2": "Yellow", "3": "Red", "R": "Calibrating",
+}
+
 # PM2.5 estimate from the raw optical dust reading (D token). This is an
 # uncalibrated approximation: the device's true PM2.5 is computed in IDEAL's
 # cloud and we have no local reference. Optical dust sensors (Sharp GP2Y10
@@ -133,7 +141,8 @@ def parse_status(raw: str) -> dict | None:
     if "L" in fields:
         status["led"] = fields["L"]
     if "S" in fields:
-        status["stage"] = fields["S"]
+        # S = air-quality indicator colour, not the fan stage (see AIR_QUALITY).
+        status["air_quality"] = AIR_QUALITY.get(fields["S"], fields["S"])
     if "K" in fields:
         status["key_lock"] = fields["K"]
     if "F" in fields:
@@ -155,7 +164,14 @@ def parse_status(raw: str) -> dict | None:
     if "X" in fields:
         status["firmware"] = fields["X"]
     if "H" in fields:
-        status["hardware"] = fields["H"]
+        # The H token is NOT hardware info -- it is the live display/night screen
+        # brightness, formatted "D<display>N<night>" (e.g. HD6N1 -> display=6,
+        # night=1). On the AP40 this is the field the app writes (D{n}/N{n}) and
+        # reads back from; the standalone L token is settable but inert.
+        h = re.match(r"D(\d)N(\d)", fields["H"])
+        if h:
+            status["display"] = int(h.group(1))
+            status["night"] = int(h.group(2))
 
     def _int(token: str) -> int | None:
         raw = fields.get(token)

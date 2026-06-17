@@ -10,7 +10,7 @@ from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import DISABLED_TOKENS, STAGE_LABELS, TOKEN_SENSORS
+from .const import DISABLED_TOKENS, MODE_TO_LABEL, TOKEN_SENSORS
 from .entity import IdealAirProEntity
 
 
@@ -21,6 +21,7 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities: AddE
         IdealAirProPm25(coordinator),
         IdealAirProContamination(coordinator),
         IdealAirProVoc(coordinator),
+        IdealAirProAirQuality(coordinator),
         IdealAirProStageSensor(coordinator),
         IdealAirProFilterStatus(coordinator),
         IdealAirProModelSensor(coordinator),
@@ -92,8 +93,29 @@ class IdealAirProVoc(IdealAirProEntity, SensorEntity):
         return self.coordinator.data.get("voc")
 
 
+class IdealAirProAirQuality(IdealAirProEntity, SensorEntity):
+    """Air-quality indicator colour (the device's LED ring): Green/Yellow/Red.
+
+    Parsed from the S token. HA records every state change, so the History and
+    Logbook for this entity show exactly when it switched green<->yellow<->red.
+    """
+
+    _attr_name = "Air quality"
+    _attr_icon = "mdi:air-filter"
+    _attr_device_class = "enum"
+    _attr_options = ["Off", "Green", "Yellow", "Red", "Calibrating"]
+
+    def __init__(self, coordinator) -> None:
+        super().__init__(coordinator)
+        self._attr_unique_id = f"{coordinator.ip}_air_quality"
+
+    @property
+    def native_value(self) -> str | None:
+        return self.coordinator.data.get("air_quality")
+
+
 class IdealAirProStageSensor(IdealAirProEntity, SensorEntity):
-    """The live running stage; carries the full parsed status as attributes."""
+    """The live running stage/mode; carries the full parsed status as attributes."""
 
     _attr_name = "Stage"
     _attr_icon = "mdi:air-purifier"
@@ -104,10 +126,10 @@ class IdealAirProStageSensor(IdealAirProEntity, SensorEntity):
 
     @property
     def native_value(self) -> str | None:
-        raw = self.coordinator.data.get("stage")
-        if raw is None:
+        mode = self.coordinator.data.get("mode")
+        if mode is None:
             return None
-        return STAGE_LABELS.get(raw, raw)
+        return MODE_TO_LABEL.get(mode, mode.title())
 
     @property
     def extra_state_attributes(self) -> dict:

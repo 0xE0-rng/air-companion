@@ -55,9 +55,9 @@ MODE_TO_LABEL: dict[str, str] = {
 # DE/DD verbs were no-ops); display brightness is the LED number (L0 = off).
 
 # Raw status token -> (friendly name, unit, device_class). Tokens handled
-# elsewhere are NOT listed here: S=stage, L=led, T=model (dedicated entities);
-# D/V used for derived PM2.5/Contamination; C=timer (number); K=child lock
-# (switch); A/M=mode (fan); H/X=device metadata.
+# elsewhere are NOT listed here: S=air-quality colour, L=led, T=model (dedicated
+# entities); D/V used for derived PM2.5/Contamination; C=timer (number); K=child
+# lock (switch); A/M=mode/stage (fan); H=led brightness; X=device metadata.
 TOKEN_SENSORS: dict[str, tuple[str, str | None, str | None]] = {
     "Y": ("Ambient light", "lx", "illuminance"),
     "Z": ("Filter run hours", "h", "duration"),
@@ -74,14 +74,3 @@ TOKEN_SENSORS: dict[str, tuple[str, str | None, str | None]] = {
 
 # Token sensors created disabled by default (opt-in diagnostics).
 DISABLED_TOKENS: set[str] = {"D", "R", "I", "J", "P", "W", "N", "O"}
-
-# Stage (S token) value -> human label.
-STAGE_LABELS: dict[str, str] = {
-    "0": "Off",
-    "-": "Off",
-    "1": "Stage 1",
-    "2": "Stage 2",
-    "3": "Stage 3",
-    "Q": "Quiet",
-    "T": "Turbo",
-}

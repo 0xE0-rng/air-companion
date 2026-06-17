@@ -16,9 +16,13 @@ below, but are not yet exposed by this integration.)
 ## Features
 
 - **Fan control** — power and preset modes (Auto, Quiet, Stage 1–3, Turbo), plus a Mode selector.
-- **Settings** — LED brightness, a power-on timer (with cancel), and child lock.
-- **Air quality** — estimated PM2.5, a VOC index and a contamination index (see the disclaimer below).
+- **Settings** — display (screen) brightness, a power-on timer (with cancel), and child lock.
+- **Air quality** — the device's own air-quality indicator colour (Green / Yellow / Red), plus estimated PM2.5, a VOC index and a contamination index (see the disclaimer below).
 - **Diagnostics** — filter status & life, fan RPM, ambient light, Wi-Fi signal, and the raw status tokens.
+
+The **Air quality** sensor reports the colour the purifier shows on its own ring,
+straight from the device — Home Assistant's History and Logbook record exactly
+when it switches between green, yellow and red.
 
 ## Air-quality readings — please read
 
